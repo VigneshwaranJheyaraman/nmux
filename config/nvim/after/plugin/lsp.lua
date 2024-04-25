@@ -35,9 +35,20 @@ end
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'tsserver', 'clojure_lsp'},
+  ensure_installed = {'eslint', 'tsserver', 'clojure_lsp'},
   handlers = {
     default_setup,
+    eslint = function ()
+        require('lspconfig').eslint.setup({
+            capabilities = lsp_default_capabilities,
+            on_attach = function (_, buffer)
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    buffer = buffer,
+                    command= "EslintFixAll"
+                })
+            end
+        })
+    end,
     lua_ls = function()
         local runtime_path = vim.split(package.path, ';')
         table.insert(runtime_path, "lua/?.lua")
