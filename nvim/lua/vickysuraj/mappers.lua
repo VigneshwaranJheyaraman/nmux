@@ -70,6 +70,8 @@ vim.keymap.set("i", "<left>", "<nop>", { noremap = true })
 vim.keymap.set("i", "<right>", "<nop>", { noremap = true })
 
 -- tmux selected copy it
-vim.keymap.set("n", "<leader>cp", function()
-    vim.cmd("silent !tmux save-buffer | pbcopy")
-end)
+local function tmux_copy()
+    vim.cmd("silent !tmux show-buffer | pbcopy")
+end
+vim.keymap.set("n", "<leader>tcb",tmux_copy)
+vim.keymap.set("v", "<leader>tcb",tmux_copy)
