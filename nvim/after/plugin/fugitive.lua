@@ -1,12 +1,14 @@
 -- get the status
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
--- checkout master
-vim.keymap.set("n", "<leader>gcm", function ()
+local function checkout_master ()
     vim.cmd.Git("checkout master")
-end)
+end
+
+-- checkout master
+vim.keymap.set("n", "<leader>gcm", checkout_master)
 -- pull origin master
 vim.keymap.set("n", "<leader>gpom", function ()
-    vim.cmd("<leader>gcm")
+    checkout_master()
     vim.cmd.Git("pull origin master")
 end)

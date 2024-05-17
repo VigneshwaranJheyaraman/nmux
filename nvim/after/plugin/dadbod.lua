@@ -10,6 +10,10 @@ vim.g.db_ui_dotenv_variable_prefix = 'DB_'
 
 -- default query saving location
 vim.g.db_ui_save_location = vim.fn.stdpath("data") .. "/queries"
+-- donot execute on save its kind of annoying
+vim.g.db_ui_execute_on_save = 0
+-- use nerd fonts
+vim.g.db_ui_use_nerd_fonts = 1
 
 -- keybindings
 vim.keymap.set("n", "<leader>odb", function()
