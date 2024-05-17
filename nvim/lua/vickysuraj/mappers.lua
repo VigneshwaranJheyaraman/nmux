@@ -1,6 +1,6 @@
 vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>q", function()
-  vim.cmd("q!")
+  vim.cmd("qa!")
 end)
 vim.keymap.set("n", "\\=", vim.cmd.tabnext)
 vim.keymap.set("n", "\\-", vim.cmd.tabprevious)

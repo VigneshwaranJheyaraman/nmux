@@ -35,7 +35,7 @@ end
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'eslint', 'tsserver', 'clojure_lsp'},
+  ensure_installed = {'eslint', 'tsserver', 'clojure_lsp', 'jdtls', 'lua_ls', 'jsonls'},
   handlers = {
     default_setup,
     eslint = function ()
@@ -101,4 +101,12 @@ cmp.setup({
           require("luasnip").lsp_expand(args.body)
       end
   }
+})
+
+-- vim dadbod to enable completion for SQL commands and variables from file buffer
+cmp.setup.filetype( { "sql" }, {
+    sources = {
+        { name = "vim-dadbod-completion" },
+        { name = "buffer" },
+    },
 })

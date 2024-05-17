@@ -6,6 +6,7 @@
 * [Pre-requisites](#prerequisites)
 * [:warning:](#fyi)
 * [Fuzzy finder](#ripgrep)
+* [vim-dad-bod](#db)
 * [tmux](#terminal-multipFLEXer)
 
 ### Prerequisites
@@ -61,6 +62,14 @@ which is really awesome with finding given the `phrase`
 
 Every command inside `~/.config/nvim/lua/vickysuraj/mapper.lua` follows a specific standard in naming the `key-mapping`
 I always consider the first `character` of the task which I intend to achieve. For instance `<leader>ff` helps us to **F**ind **F**iles using `telescope`.
+
+### DB
+:warning: **Requires `postgresql` install on your machine**
+Added support to viewing `db` related querying from `neovim`. For security purpose, DB setup supports exporting DB related information as `env`
+variable
+```bash
+$ export DB_<name>=<DB_TYPE>://<USER>:<PASSWORD>@<HOST>:<PORT>/<DB_NAME>
+```
 
 ### Terminal Multi_FLEX_er
 

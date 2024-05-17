@@ -30,4 +30,9 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'l3mon4d3/luasnip'
+  -- db completion dadbod
+  use 'tpope/vim-dadbod'
+  use 'tpope/vim-dotenv'
+  use 'kristijanhusak/vim-dadbod-ui'
+  use 'kristijanhusak/vim-dadbod-completion'
 end)
