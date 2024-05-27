@@ -22,3 +22,15 @@ function Stringify(tableWithData)
 
     return "{" .. table.concat(result, ",") .. "}"
 end
+
+function Keyify(tableWithData)
+    local result ={};
+    local n =0
+    for key, _ in pairs(tableWithData) do
+        -- prepare json key-value pairs and save them in separate table
+        n = n+1;
+        result[n] = key;
+    end
+
+    return "{" .. Dump(result) .. "}"
+end

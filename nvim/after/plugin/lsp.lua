@@ -36,7 +36,8 @@ end
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {'eslint', 'tsserver', 'clojure_lsp', 'jdtls', 'lua_ls', 'jsonls'},
-  handlers = {
+  automatic_installation =true,
+  handlers={
     default_setup,
     eslint = function ()
         require('lspconfig').eslint.setup({
@@ -53,33 +54,32 @@ require('mason-lspconfig').setup({
         local runtime_path = vim.split(package.path, ';')
         table.insert(runtime_path, "lua/?.lua")
         table.insert(runtime_path, "lua/?/init.lua")
-      local lua_opts = {
-          Lua = {
-              runtime = {
-                  version = 'LuaJIT',
-                  path = runtime_path
-              },
-              diagnostics = {
-                  globals = {'vim'},
-              },
-              workspace = {
-                  library = {
-                      vim.env.VIMRUNTIME,
-                  },
-                  checkThirdParty = false,
-              },
-              telemetry = {
-                  enable = false,
-              }
-          }
-      }
-      require('lspconfig').lua_ls.setup({
-          capabilities = lsp_default_capabilities,
-          settings = lua_opts,
-      })
+        local lua_opts = {
+            Lua = {
+                runtime = {
+                    version = 'LuaJIT',
+                    path = runtime_path
+                },
+                diagnostics = {
+                    globals = {'vim'},
+                },
+                workspace = {
+                    library = {
+                        vim.env.VIMRUNTIME,
+                    },
+                    checkThirdParty = false,
+                },
+                telemetry = {
+                    enable = false,
+                }
+            }
+        }
+        require('lspconfig').lua_ls.setup({
+            capabilities = lsp_default_capabilities,
+            settings = lua_opts,
+        })
     end,
-  }
-})
+}});
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}

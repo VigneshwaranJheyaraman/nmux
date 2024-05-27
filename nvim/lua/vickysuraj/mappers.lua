@@ -78,3 +78,12 @@ local function tmux_copy()
 end
 vim.keymap.set("n", "<leader>tcb",tmux_copy)
 vim.keymap.set("v", "<leader>tcb",tmux_copy)
+
+-- sql formatter
+-- install sql-formatter BLAZINGLY FAST
+vim.keymap.set("n", "<leader>fof", function()
+    vim.cmd("%!sql-formatter -l postgresql")
+end)
+vim.keymap.set("v", "<leader>fof", function()
+    vim.cmd("!sql-formatter -l postgresql")
+end)

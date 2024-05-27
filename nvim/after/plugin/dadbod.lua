@@ -26,3 +26,7 @@ vim.keymap.set("n", "<leader>cdb", function()
     -- closes the database ui
     vim.cmd("tabclose")
 end)
+
+vim.keymap.set("n", "<leader>dbt", function()
+    vim.cmd("DBUIToggle")
+end)

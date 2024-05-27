@@ -25,7 +25,10 @@ return require('packer').startup(function(use)
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
   -- lsp support
-  use 'neovim/nvim-lspconfig'
+  use {
+      'neovim/nvim-lspconfig',
+      tag='v0.1.7'
+  }
   -- autocompletion
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
