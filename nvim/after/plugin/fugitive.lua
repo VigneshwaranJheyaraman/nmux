@@ -2,7 +2,7 @@
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
 local function checkout_master ()
-    vim.cmd.Git("checkout master")
+    vim.cmd("silent! Git checkout master")
 end
 
 -- checkout master
