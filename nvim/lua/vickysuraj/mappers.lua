@@ -87,3 +87,7 @@ end)
 vim.keymap.set("v", "<leader>fof", function()
     vim.cmd("'<,'>!sql-formatter -l postgresql")
 end)
+
+-- ctrl+c to save and goto NORMAL mode
+vim.keymap.set("i", "<C-c>", "<Esc>:w<CR>", { noremap = true})
+
