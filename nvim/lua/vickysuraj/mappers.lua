@@ -1,5 +1,3 @@
--- file explorer
-vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
 -- quit them files
 vim.keymap.set("n", "<leader>Q", function()
   vim.cmd("qa!")
