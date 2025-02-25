@@ -17,7 +17,7 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
@@ -37,8 +37,3 @@ vim.opt.mouse=""
 --set crosshair
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
-
-
--- changet the directory to current working directory
--- currently disabling it to fix LSP configs
--- vim.cmd.cd(require("luv").cwd());
