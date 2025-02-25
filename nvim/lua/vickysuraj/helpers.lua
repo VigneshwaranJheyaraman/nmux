@@ -1,6 +1,6 @@
 local helpers = {}
 
-helpers.Dump = function (data)
+local function Dump (data)
    if type(data) == 'table' then
       local s = '{ '
       for k,v in pairs(data) do
@@ -12,6 +12,8 @@ helpers.Dump = function (data)
       return tostring(data)
    end
 end
+
+helpers.Dump = Dump
 
 helpers.Stringify = function (tableWithData)
     local result
