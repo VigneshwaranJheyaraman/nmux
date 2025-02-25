@@ -7,5 +7,10 @@ return {
         -- Optional dependencies
         dependencies = { { "echasnovski/mini.icons", opts = {} } },
         -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+        config = function()
+            vim.keymap.set({ "n", "v" }, "<leader>Ex", function()
+                vim.cmd("Oil")
+            end)
+        end
     }
 }
