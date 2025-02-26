@@ -40,7 +40,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>st", function()
     vim.cmd("vert term")
 end)
-vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]])
 
 -- disable all the arrow keys
 vim.keymap.set("", "<up>", "<nop>", { noremap = true })
