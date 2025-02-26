@@ -23,3 +23,29 @@ vim.api.nvim_create_autocmd("TermOpen", {
         vim.opt.number=false
     end
 })
+
+---@param toggleValue boolean
+local function toggleHighlightAndIncrementSearch(toggleValue)
+  vim.opt.hlsearch = toggleValue
+  vim.opt.incsearch = toggleValue
+ end
+
+local searchGroup = vim.api.nvim_create_augroup("search-highlight", {clear=true})
+local searchPattern= "/,\\?"
+
+-- for enabling highlight search on command line entry i.e., <ESC>/
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+  desc= "i handle search highlight toggling",
+  pattern=searchPattern,
+  group= searchGroup,
+  callback= function ()
+    toggleHighlightAndIncrementSearch(true)
+  end
+})
+vim.api.nvim_create_autocmd("InsertEnter", {
+  desc= "i handle search highlight toggling",
+  group= searchGroup,
+  callback= function ()
+    toggleHighlightAndIncrementSearch(false)
+  end
+})
