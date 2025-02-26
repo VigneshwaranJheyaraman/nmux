@@ -4,6 +4,8 @@
 
 ## Index
 * [Pre-requisites](#prerequisites)
+  * [What is `lazy.nvim`](#lazy-nvim)
+  * [Out of the box features](#features)
 * [:warning:](#fyi)
 * [Fuzzy finder](#ripgrep)
 * [vim-dad-bod](#db)
@@ -14,12 +16,34 @@
 For you to use `neovim` you need [this](https://github.com/neovim/neovim), now I
 always suggest installing from `source` rather than opting `package-manager` to do for ourself.
 
-```bash
+```shell
 $ nvim --version
 ```
 
-Once `neovim` is installed we require [`Packer`](https://github.com/wbthomason/packer.nvim) which helps
-us handle all the external plugins at ease
+Once `neovim` is installed we require [`Lazy.nvim`](https://github.com/folke/lazy.nvim) which helps
+us handle all the external plugins at ease and also lazy
+
+Make sure your `terminal` supports `Nerdfont` for nice devX [check here](https://www.nerdfonts.com/)
+
+```shell
+# for Mac
+brew install font-hack-nerd-font
+```
+
+#### Lazynvim
+
+`lazy.nvim` is a `neo-vim`'s plugin manager which handles the plugins and supports lazy requiring thereby
+not loading all stuff on `nvim-open`. Also unlike `packer` which stores the `plugins` inside the `nvim-directory` and uses them
+`lazy.nvim` will add the `plugins` to the `vim.standardPath` (_like classpath for java_)
+which has the plugins loaded we configured. Also `lazy.nvim` will allow isolation of
+plugins given their `install-configuration`. its awesome check it out!!!!
+
+#### Features
+* markdown-rendered
+* Language-Server for set of `programming-languages`. You can find the [here](https://github.com/VigneshwaranJheyaraman/nmux/blob/master/lua/vickysuraj/commons.lua)
+* Oil tree better than `NerdTree` and behaves more `neovimyyyyy`
+* added logic for `floating` terminal
+* more mapping + statusline
 
 Install it will help you proceed further with `config` & setup
 
@@ -30,14 +54,14 @@ need to _configure_ `neovim` and then
 
 Now `clone` [repo](https://github.com/VigneshwaranJheyaraman/nmux)
 
-```bash
+```shell
 $ cd ~
 $ git clone git@github.com/VigneshwaranJheyaraman:nmux ./config 
 ```
 
 Once the repository is cloned. The `config` is already in place kindly start `nvim`
 
-```bash
+```shell
 $ nvim $WORK_DIRECTORY
 ```
 
@@ -67,7 +91,8 @@ I always consider the first `character` of the task which I intend to achieve. F
 :warning: **Requires `postgresql` install on your machine**
 Added support to viewing `db` related querying from `neovim`. For security purpose, DB setup supports exporting DB related information as `env`
 variable
-```bash
+ 
+```shell
 $ export DB_<name>=<DB_TYPE>://<USER>:<PASSWORD>@<HOST>:<PORT>/<DB_NAME>
 ```
 
