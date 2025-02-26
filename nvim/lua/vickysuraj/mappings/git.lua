@@ -24,7 +24,7 @@ end)
 -- checkout branch
 vim.keymap.set("n", "<leader>gch", function()
     local branch_name = vim.fn.input{
-        prompt = "branch name"
+        prompt = "branch name:"
     }
     checkout_master {
         branch_name = branch_name
