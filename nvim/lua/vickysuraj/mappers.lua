@@ -6,7 +6,7 @@ vim.keymap.set("n", "<leader>q", function()
   vim.cmd("q!")
 end)
 
-vim.keymap.set("n", "\\n", vim.cmd.tabnew)
+vim.keymap.set("n", "<local-leader>n", vim.cmd.tabnew)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -69,3 +69,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>:w<CR>", { noremap = true})
 
 -- source the lua file
 vim.keymap.set("n", "<leader><leader>read", "<cmd>source %<CR>")
+
+-- jump between buffers
+vim.keymap.set("n", "<leader>gb", function() vim.cmd("b#") end)
