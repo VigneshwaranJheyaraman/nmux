@@ -6,7 +6,8 @@ return {
     ---@type render.md.UserConfig
     opts = {},
     config = function ()
-      vim.keymap.set("n", "<leader>md", vim.cmd("RenderMarkdown"))
+      vim.keymap.set("n", "<leader>md", vim.cmd("RenderMarkdown<CR>"))
+      vim.keymap.set("n", "<leader>md!", vim.cmd("RenderMarkdown disable<CR>"))
     end
   }
 }
