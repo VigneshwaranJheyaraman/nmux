@@ -1,4 +1,6 @@
-function Dump(data)
+local helpers = {}
+
+local function Dump (data)
    if type(data) == 'table' then
       local s = '{ '
       for k,v in pairs(data) do
@@ -11,7 +13,9 @@ function Dump(data)
    end
 end
 
-function Stringify(tableWithData)
+helpers.Dump = Dump
+
+helpers.Stringify = function (tableWithData)
     local result
     for key, value in pairs(tableWithData) do
         -- prepare json key-value pairs and save them in separate table
@@ -23,7 +27,7 @@ function Stringify(tableWithData)
     return "{" .. table.concat(result, ",") .. "}"
 end
 
-function Keyify(tableWithData)
+helpers.Keyify = function (tableWithData)
     local result ={};
     local n =0
     for key, _ in pairs(tableWithData) do
@@ -32,5 +36,7 @@ function Keyify(tableWithData)
         result[n] = key;
     end
 
-    return "{" .. Dump(result) .. "}"
+    return "{" .. helpers.Dump(result) .. "}"
 end
+
+return helpers
