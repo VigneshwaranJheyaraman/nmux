@@ -3,9 +3,10 @@ return {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         config = function()
+          local commons = require("vickysuraj.commons")
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all" (the five listed parsers should always be installed)
-                ensure_installed = require("vickysuraj.commons").required_langs,
+                ensure_installed = commons.required_langs,
 
                 -- Install parsers synchronously (only applied to `ensure_installed`)
                 sync_install = false,
@@ -35,11 +36,8 @@ return {
                     disable = function(lang, buf)
                         if lang == nil then
                             return true
-                        end
-                        local max_file_size = 100 * 1024 --100KB
-                        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                        if ok and stats and stats.size > max_file_size then
-                            return true
+                        else
+                            return commons.is_huge_file(buf)
                         end
                     end
                 },

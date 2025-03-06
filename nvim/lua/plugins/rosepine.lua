@@ -19,6 +19,7 @@ return {
       vim.keymap.set("n", "<leader>cs", function()
         color_scheme.randomColorSchema()
       end)
+      color_scheme.ColorMyBash("tokyonight-storm")
     end
   }
 }
