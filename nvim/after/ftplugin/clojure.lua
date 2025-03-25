@@ -2,12 +2,10 @@ local floating_window = require("vickysuraj.floating_window")
 
 local function has_file (file_name)
   if vim.fn.executable("rg") then
-    local files_found = vim.cmd("silent!rg --files --color never *" .. file_name .. "*", {silent = true})
-    if files_found ~= "" then
-      return false
-    end
+    local file_found = string.gsub(vim.fn.system("rg --files --color never *" .. file_name .. "*"), "%s+", "")
+    return file_found == file_name
   end
-  return true
+  return false
 end
 
 local function get_repl_command ()

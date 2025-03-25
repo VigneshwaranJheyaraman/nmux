@@ -19,10 +19,10 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
@@ -38,7 +38,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- Start terminal in on vertical window
 vim.keymap.set("n", "<leader>st", function()
-    vim.cmd("vert term")
+  vim.cmd("vert term")
 end)
 
 -- disable all the arrow keys
@@ -53,18 +53,18 @@ vim.keymap.set("i", "<right>", "<nop>", { noremap = true })
 
 -- tmux selected copy it
 local function tmux_copy()
-    vim.cmd("silent !tmux show-buffer | pbcopy")
+  vim.cmd("silent !tmux show-buffer | pbcopy")
 end
-vim.keymap.set({"n","v"}, "<leader>tcb",tmux_copy)
+vim.keymap.set({ "n", "v" }, "<leader>tcb", tmux_copy)
 
 -- sql formatter
 -- install sql-formatter BLAZINGLY FAST
-vim.keymap.set({"n","v"}, "<leader>fof", function()
-    vim.cmd("%!sql-formatter -l postgresql")
+vim.keymap.set({ "n", "v" }, "<leader>fof", function()
+  vim.cmd("%!sql-formatter -l postgresql")
 end)
 
 -- ctrl+c to save and goto NORMAL mode
-vim.keymap.set("i", "<C-c>", "<Esc>:w<CR>", { noremap = true})
+vim.keymap.set("i", "<C-c>", "<Esc>:w<CR>", { noremap = true })
 
 -- source the lua file
 vim.keymap.set("n", "<leader><leader>read", "<cmd>source %<CR>")
