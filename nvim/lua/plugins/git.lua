@@ -2,7 +2,7 @@ return {
     {
         'tpope/vim-fugitive',
         config = function()
-            require("vickysuraj.mappings.git")
+            require("vickysuraj.setup.git")
         end
     }
 }

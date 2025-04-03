@@ -1,5 +1,5 @@
 local floating_window = require("vickysuraj.floating_window")
-vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]])
+vim.keymap.set("t", "<Esc><Esc>", [[ <C-\><C-n> ]])
 
 -- Example usage:
 -- Create a floating window with default dimensions

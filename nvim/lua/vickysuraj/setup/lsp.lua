@@ -1,20 +1,88 @@
 local M = {}
 local nvim_lsp = require('lspconfig')
+local shortcut_utils = require("vickysuraj.shortcuts.utils")
 
 local function attach_lsp_bindings(event)
     local bufnr = event.buf
     local opts = {buffer = bufnr, remap = false}
 
-    vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "<leader>fr", function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+    local all_shortcuts = {
+      {
+        mode="n",
+        shortcut="<leader>gd",
+        mapper_cmd_OR_function=function() vim.lsp.buf.definition() end,
+        opts = opts,
+        desc = "go to definition"
+
+      },
+      {
+        mode="n",
+        shortcut="K",
+        mapper_cmd_OR_function=function() vim.lsp.buf.hover() end,
+        opts = opts,
+        desc = "hover against the variable under cursor"
+      },
+      {
+        mode="n",
+        shortcut="<leader>vws",
+        mapper_cmd_OR_function=function() vim.lsp.buf.workspace_symbol() end,
+        opts = opts,
+        desc = "find workspace symbol"
+      },
+      {
+        mode="n",
+        shortcut="<leader>vd",
+        mapper_cmd_OR_function=function() vim.diagnostic.open_float() end,
+        opts = opts,
+        desc = "open floating diagnostic"
+      },
+      {
+        mode = "n",
+        shortcut = "[d",
+        mapper_cmd_OR_function = function() vim.diagnostic.goto_next() end,
+        opts = opts,
+        desc = "go to next diagnostic"
+
+      },
+      {
+        mode = "n",
+        shortcut = "]d",
+        mapper_cmd_OR_function = function() vim.diagnostic.goto_prev() end,
+        opts = opts,
+        desc = "go to previous diagnostic"
+
+      },
+      {
+        mode="n",
+        shortcut="<leader>vca",
+        mapper_cmd_OR_function=function() vim.lsp.buf.code_action() end,
+        opts = opts,
+        desc = "perform LSP related code action"
+      },
+      {
+        mode="n",
+        shortcut="<leader>fr",
+        mapper_cmd_OR_function=function() vim.lsp.buf.references() end,
+        opts = opts,
+        desc = "find all references"
+      },
+      {
+        mode="n",
+        shortcut="<leader>vrn",
+        mapper_cmd_OR_function=function() vim.lsp.buf.rename() end,
+        opts = opts,
+        desc = "rename variable across usages"
+      },
+      {
+        mode="i",
+        shortcut = "<C-h>",
+        mapper_cmd_OR_function = function() vim.lsp.buf.signature_help() end,
+        opts = opts,
+        desc = "details of the variable under cursor"
+      }
+    }
+
+    shortcut_utils.shortcuts_table_TO_keymaps(all_shortcuts)
 end
 
 
@@ -40,6 +108,8 @@ M.setup = function (opts)
     assert(lsp_default_capabilities)
 
     local required_lsp = opts.required_lsp or {}
+
+    M.rl = required_lsp
 
     require('mason').setup({})
     require('mason-lspconfig').setup({

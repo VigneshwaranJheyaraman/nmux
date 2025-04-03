@@ -2,7 +2,7 @@ return {
     {
         'HiPhish/rainbow-delimiters.nvim',
         config = function ()
-            require("vickysuraj.mappings.lisp")
+            require("vickysuraj.setup.lisp")
         end
     }
 }

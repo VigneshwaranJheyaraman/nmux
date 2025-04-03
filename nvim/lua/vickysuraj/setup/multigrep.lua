@@ -48,7 +48,14 @@ local live_multigrep = function(opts)
 end
 
 multigrep.setup = function()
-  vim.keymap.set("n", "<leader>grep", live_multigrep)
+  require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
+    {
+      mode = "n",
+      shortcut = "<leader>grep",
+      mapper_cmd_OR_function = live_multigrep,
+      desc = "live multigrep",
+    }
+  }
 end
 
 return multigrep

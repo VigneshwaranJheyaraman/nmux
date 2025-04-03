@@ -42,22 +42,59 @@ local function create_floating_window(opts)
   return { buf = buf, win = win }
 end
 
-M.toggle_terminal = function(opts)
+M.hide_window = function()
+    vim.api.nvim_win_hide(state.floating.win)
+end
+
+M.open_window = function (opts)
   opts = opts or {}
-  local window_mode = opts.mode or "terminal"
+  local window_mode = opts.mode
+  assert(opts.mode, "toggling missing mode")
+  assert(opts.on_open, "toggling window missing on_open function")
+  state.floating = create_floating_window { buf = state.floating.buf, mode = window_mode }
+  if vim.bo[state.floating.buf].buftype ~= opts.mode then
+    opts.on_open()
+  end
+end
+
+M.toggle_window = function(opts)
   if not vim.api.nvim_win_is_valid(state.floating.win) then
-    state.floating = create_floating_window { buf = state.floating.buf, mode = window_mode }
-    if vim.bo[state.floating.buf].buftype ~= "terminal" then
-      vim.cmd.terminal(opts.cmd)
+    M.open_window(opts)
+  else
+    M.hide_window()
+  end
+end
+
+local function popluate_terminal_options (opts)
+  opts = opts or {}
+  local term_opts = {
+    mode = "terminal",
+    on_open = function ()
+      if opts.cmd then
+        vim.cmd.terminal(opts.cmd)
+      else
+        vim.cmd.terminal()
+      end
       if opts.on_term_enter ~= nil and type(opts.on_term_enter) == "function" then
         opts.on_term_enter {
           bufnr = state.floating.buf
         }
       end
     end
-  else
-    vim.api.nvim_win_hide(state.floating.win)
+  }
+
+  for ki, val_u in pairs(opts) do
+    term_opts[ki] = val_u
   end
+  return term_opts
+end
+
+M.toggle_terminal = function (opts)
+  M.toggle_window(popluate_terminal_options(opts))
+end
+
+M.open_terminal = function (opts)
+  M.open_window(popluate_terminal_options(opts))
 end
 
 return M

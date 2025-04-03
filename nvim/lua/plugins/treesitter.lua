@@ -3,7 +3,7 @@ return {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         config = function()
-          local commons = require("vickysuraj.commons")
+          local commons = require("vickysuraj.utils.lsp")
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all" (the five listed parsers should always be installed)
                 ensure_installed = commons.required_langs,
@@ -37,7 +37,7 @@ return {
                         if lang == nil then
                             return true
                         else
-                            return commons.is_huge_file(buf)
+                            return require("vickysuraj.utils.file").is_huge_file(buf)
                         end
                     end
                 },

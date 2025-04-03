@@ -1,5 +1,7 @@
 local floating_window = require("vickysuraj.floating_window")
 
+local is_REPL_running = false
+
 local function has_file (file_name)
   if vim.fn.executable("rg") then
     local file_found = string.gsub(vim.fn.system("rg --files --color never *" .. file_name .. "*"), "%s+", "")
@@ -18,10 +20,24 @@ local function get_repl_command ()
   end
 end
 
-vim.keymap.set("n", "<leader>cch", [[ _d$i;; =====<Esc>pa=====<Esc> ]])
-vim.keymap.set("n", "<localleader>repl", function ()
+local function start_repl ()
   floating_window.toggle_terminal {
     cmd = get_repl_command(),
     on_term_enter = floating_window.toggle_terminal
   }
-end)
+end
+
+require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
+  {
+    mode = "n",
+    shortcut = "<leader>cch",
+    mapper_cmd_OR_function = [[ _d$i;; =====<Esc>pa=====<Esc> ]],
+    desc = "clojure comment header"
+  },
+  {
+    mode = "n",
+    shortcut = "<localleader>repl",
+    mapper_cmd_OR_function = start_repl,
+    desc = "clojure start repl"
+  }
+}

@@ -19,7 +19,7 @@ return {
             };
             -- naming is weird because i don't want to cause warn on same naming required
             -- The same file is required with different names.
-            require("vickysuraj.mappings.teleScope").setup {};
+            require("vickysuraj.setup.teleScope").setup {};
         end
     }
 }

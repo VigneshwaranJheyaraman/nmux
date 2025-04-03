@@ -12,14 +12,26 @@ return {
     },
     name = 'rose-pine',
     config = function()
-      local color_scheme = require("vickysuraj.mappings.color_scheme");
-      vim.keymap.set("n", "<leader>pine", function()
-        color_scheme.ColorMyBash("rose-pine")
-      end)
-      vim.keymap.set("n", "<leader>cs", function()
-        color_scheme.randomColorSchema()
-      end)
-      color_scheme.ColorMyBash("tokyonight-storm")
+      local color_scheme = require("vickysuraj.setup.color_scheme");
+      require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
+        {
+          mode = "n",
+          shortcut = "<leader>cs",
+          mapper_cmd_OR_function = function ()
+            color_scheme.randomColorSchema()
+          end,
+          desc = "random color schema"
+        },
+        {
+          mode = "n",
+          shortcut = "<leader>pine",
+          mapper_cmd_OR_function = function ()
+            color_scheme.ColorMyBash("rose-pine")
+          end,
+          desc = "rose-pine color schema"
+        }
+      }
+      color_scheme.ColorMyBash(require("config").default_theme)
     end
   }
 }

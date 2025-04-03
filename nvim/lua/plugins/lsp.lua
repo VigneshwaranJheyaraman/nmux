@@ -46,9 +46,9 @@ return {
         },
         config = function()
             local lsp_default_capabilities = require("blink.cmp").get_lsp_capabilities()
-            require("vickysuraj.mappings.lsp").setup {
+            require("vickysuraj.setup.lsp").setup {
                 capabilities = lsp_default_capabilities,
-                required_lsp = require("vickysuraj.commons").required_lsp
+                required_lsp = require("vickysuraj.utils.lsp").required_lsp
             }
         end
     }

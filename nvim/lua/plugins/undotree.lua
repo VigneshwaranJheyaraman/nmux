@@ -2,7 +2,14 @@ return {
     {
         'mbbill/undotree',
         config = function()
-            vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+          require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
+            {
+                mode = "n",
+                shortcut = "<leader>u",
+                mapper_cmd_OR_function = vim.cmd.UndotreeToggle,
+                desc = "open undotree"
+            }
+          }
         end
     }
 }
