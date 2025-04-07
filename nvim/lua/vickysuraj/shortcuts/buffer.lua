@@ -10,12 +10,6 @@ local buffer_shortcuts = {
   },
   {
     mode="n",
-    shortcut= "<leader>Q",
-    mapper_cmd_OR_function= ":qa!",
-    desc = "force quit all the files"
-  },
-  {
-    mode="n",
     shortcut= "<leader>q",
     mapper_cmd_OR_function= ":q!<CR>",
     desc = "force quit the file"
@@ -70,7 +64,7 @@ local buffer_shortcuts = {
   {
     mode="n",
     shortcut= "<leader>gb",
-    mapper_cmd_OR_function= ":b#",
+    mapper_cmd_OR_function= ":b#<CR>",
     desc = "jump between buffers"
   },
   {
