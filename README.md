@@ -3,6 +3,7 @@
 > Just an enthusiast trying to become a better "_vimmer_"
 
 ## Index
+* [Easy setup](#easy-setup)
 * [Pre-requisites](#prerequisites)
   * [What is `lazy.nvim`](#lazy-nvim)
   * [Out of the box features](#features)
@@ -26,8 +27,7 @@ us handle all the external plugins at ease and also lazy
 Make sure your `terminal` supports `Nerdfont` for nice devX [check here](https://www.nerdfonts.com/)
 
 ```shell
-# for Mac
-brew install font-hack-nerd-font
+make install-fonts 
 ```
 
 #### Lazynvim
@@ -40,7 +40,7 @@ plugins given their `install-configuration`. its awesome check it out!!!!
 
 #### Features
 * markdown-rendered
-* Language-Server for set of `programming-languages`. You can find the [here](https://github.com/VigneshwaranJheyaraman/nmux/blob/master/lua/vickysuraj/commons.lua)
+* Language-Server for set of `programming-languages`. You can find the [here](https://github.com/VigneshwaranJheyaraman/nmux/blob/master/lua/vickysuraj/utils/)
 * Oil tree better than `NerdTree` and behaves more `neovimyyyyy`
 * added logic for `floating` terminal
 * more mapping + statusline
@@ -103,3 +103,23 @@ working at the same time with _Blazingly fast_ jumps and DX. I personally made s
 which can be stored inside `~/.tmux.conf` or `symbolic link` to use the same
 
 > Live long and prosper :vulcan_salute:
+
+### Easy setup
+
+To ease out the setup process, introduced `makefile` and for
+
+#### Macintosh
+
+Kindly change the variable called `package_manager` in `Makefile` to `brew` from `apt`, then run
+
+```shell
+make setup
+```
+
+#### Linux
+
+Just run
+
+```shell
+make setup
+```
