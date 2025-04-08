@@ -12,7 +12,7 @@ local shortcuts = {
     desc ="Make copilot read your buffer and fix the possible issues"
   },
   {
-    mode = "n",
+    mode = { "n", "v" },
     shortcut = "<leader>prom",
     mapper_cmd_OR_function = "<cmd>CopilotChatPrompts<CR>",
     desc ="Make copilot read your buffer and fix the possible issues"
