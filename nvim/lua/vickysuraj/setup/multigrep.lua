@@ -49,11 +49,13 @@ end
 
 multigrep.setup = function()
   require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
-    {
-      mode = "n",
-      shortcut = "<leader>grep",
-      mapper_cmd_OR_function = live_multigrep,
-      desc = "live multigrep",
+    shortcuts = {
+      {
+        mode = "n",
+        shortcut = "<leader>grep",
+        mapper_cmd_OR_function = live_multigrep,
+        desc = "live multigrep",
+      }
     }
   }
 end

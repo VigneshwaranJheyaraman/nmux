@@ -141,11 +141,11 @@ local disable_arrow_key_mappings = {
   }
 };
 
-if not config.enable_arrow_keys then
+if not config.get_config("arrow_keys") then
   -- disable all the arrow keys
-  if not config.enable_arrow_keys then
-    shortcuts_utils.shortcuts_table_TO_keymaps(disable_arrow_key_mappings)
+  if not config.get_config("arrow_keys") then
+    shortcuts_utils.shortcuts_table_TO_keymaps{ shortcuts = disable_arrow_key_mappings }
   end
 end
 
-shortcuts_utils.shortcuts_table_TO_keymaps(buffer_shortcuts)
+shortcuts_utils.shortcuts_table_TO_keymaps{ shortcuts = buffer_shortcuts }

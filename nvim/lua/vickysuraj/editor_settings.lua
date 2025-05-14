@@ -2,10 +2,6 @@ local config = require("config")
 
 vim.opt.guicursor = ""
 
--- numbering
-vim.opt.nu = true
-vim.opt.relativenumber = true
-
 -- whitespace >>>>> tabs
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -17,7 +13,7 @@ vim.opt.smartindent = true
 -- line wrapping
 vim.opt.wrap = false
 
-vim.opt.swapfile = config.have_swap_file
+vim.opt.swapfile = config.get_config("have_swap_file")
 vim.opt.backup = false
 
 -- undoing state management
@@ -38,9 +34,9 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
-vim.opt.shell = config.shell
+vim.opt.shell = config.get_config("shell")
 
-if config.enable_mouse then
+if config.get_config("mouse") then
   vim.opt.mouse="a"
 else
   vim.opt.mouse=""

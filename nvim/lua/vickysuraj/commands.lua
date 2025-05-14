@@ -49,3 +49,18 @@ vim.api.nvim_create_autocmd("InsertEnter", {
     toggleHighlightAndIncrementSearch(false)
   end
 })
+-- always set relative number and number
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  desc= "i make sure we always have relative number and number set",
+  pattern={ "*" },
+  callback= function ()
+    --numbering
+    local fileType =vim.bo.filetype;
+    local enableNumbr = (
+      fileType ~= "" and
+      (string.find(fileType, "^Telescope*") == nil)
+    );
+    vim.opt.number = enableNumbr;
+    vim.opt.relativenumber = enableNumbr;
+  end
+})

@@ -1,6 +1,16 @@
 local M = {}
 
-M.shortcuts_table_TO_keymaps = function (shortcuts_table)
+-- add shortcuts keymaps
+-- @param shortcuts_table table
+-- @property shortcuts_table.mode string
+-- @property shortcuts_table.shortcut string
+-- @property shortcuts_table.mapper_cmd_OR_function string | function
+-- @property shortcuts_table.opts table
+-- @property shortcuts_table.desc string
+M.shortcuts_table_TO_keymaps = function (keymaps_with_options)
+  local shortcuts_table = keymaps_with_options.shortcuts;
+  local options = keymaps_with_options.options or {};
+  local removeKeymap = options.removeKeymap or false
   for _, shortcut in pairs(shortcuts_table) do
     local mode = shortcut.mode or "n"
     local shoortcut = shortcut.shortcut
@@ -21,7 +31,13 @@ M.shortcuts_table_TO_keymaps = function (shortcuts_table)
     for ki, val_u in pairs(default_opts) do
       opts[ki] = opts[ki] or val_u
     end
-    vim.keymap.set(mode, shoortcut, mapper_cmd_OR_function, opts)
+    if removeKeymap then
+      pcall(function()
+        vim.keymap.del(mode, shoortcut)
+      end)
+    else
+      vim.keymap.set(mode, shoortcut, mapper_cmd_OR_function, opts)
+    end
   end
 end
 

@@ -82,7 +82,7 @@ local function attach_lsp_bindings(event)
       }
     }
 
-    shortcut_utils.shortcuts_table_TO_keymaps(all_shortcuts)
+    shortcut_utils.shortcuts_table_TO_keymaps{shortcuts =all_shortcuts}
 end
 
 

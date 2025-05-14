@@ -16,32 +16,34 @@ vim.g.db_ui_execute_on_save = 0
 vim.g.db_ui_use_nerd_fonts = 1
 
 require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
-  {
-    mode = "n",
-    shortcut = "<leader>odb",
-    mapper_cmd_OR_function = function()
-      -- opens the database ui
-      vim.cmd("tabnew")
-      vim.cmd("DBUI")
-    end,
-    desc = "Open Database neovim UI"
-  },
-  {
-    mode = "n",
-    shortcut = "<leader>cdb",
-    mapper_cmd_OR_function = function()
-      -- closes the database ui
-      vim.cmd("tabclose")
-    end,
-    desc = "Close Database neovim UI"
-  },
-  {
-    mode = "n",
-    shortcut = "<leader>dbt",
-    mapper_cmd_OR_function = function()
-      vim.cmd("DBUIToggle")
-    end,
-    desc = "Toggle Database neovim UI"
-  }
+  shortcuts = {
+    {
+      mode = "n",
+      shortcut = "<leader>odb",
+      mapper_cmd_OR_function = function()
+        -- opens the database ui
+        vim.cmd("tabnew")
+        vim.cmd("DBUI")
+      end,
+      desc = "Open Database neovim UI"
+    },
+    {
+      mode = "n",
+      shortcut = "<leader>cdb",
+      mapper_cmd_OR_function = function()
+        -- closes the database ui
+        vim.cmd("tabclose")
+      end,
+      desc = "Close Database neovim UI"
+    },
+    {
+      mode = "n",
+      shortcut = "<leader>dbt",
+      mapper_cmd_OR_function = function()
+        vim.cmd("DBUIToggle")
+      end,
+      desc = "Toggle Database neovim UI"
+    }
 
+  }
 }

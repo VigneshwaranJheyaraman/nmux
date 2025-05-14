@@ -60,4 +60,6 @@ local lsp_shortcuts = {
   }
 }
 
-require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps(lsp_shortcuts)
+require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps{
+  shortcuts = lsp_shortcuts
+}

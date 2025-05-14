@@ -19,13 +19,15 @@ return {
 				view_options = { show_hidden = true },
 			})
             require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
-              {
-                mode = { "n", "v" },
-                shortcut = "<leader>pe",
-                mapper_cmd_OR_function = function()
-                  vim.cmd("Oil")
-                end,
-                desc = "open project explorer"
+              shortcuts = {
+                {
+                  mode = { "n", "v" },
+                  shortcut = "<leader>pe",
+                  mapper_cmd_OR_function = function()
+                    vim.cmd("Oil")
+                  end,
+                  desc = "open project explorer"
+                }
               }
             }
         end
