@@ -7,7 +7,7 @@ local state = {
   have_swap_file = false,
   shell = "/bin/zsh",
   mouse = false,
-  default_theme = "retrobox",
+  default_theme = "zaibatsu",
 }
 
 local function hasKeyInMap(map, key)

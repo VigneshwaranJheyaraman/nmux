@@ -15,15 +15,20 @@ M.setup_default_register = function ()
   local registry = {
     {
       name = "S",
-      value = "(do\n\t(require 'dev)\n\t(dev/restart {:without (dev/exclude-states)}))"
+      value = "(do\n\t(require 'dev)\n\t(dev/restart {:without (dev/exclude-states)}))",
+      override = true
     }
   };
 
   for _, register in pairs(registry) do
     local existingValue = vim.fn.getreg(register.name)
     local value = register.value
+    local reg_name = register.name
+    if register.override then
+      vim.cmd(string.format("let @%s=\"\"", string.lower(reg_name)))
+    end
     if existingValue == "" then
-      vim.fn.setreg(register.name, value);
+      vim.fn.setreg(reg_name, value);
     end
   end
 end

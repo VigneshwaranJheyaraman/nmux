@@ -22,6 +22,12 @@ local shortcuts = {
     shortcut = "<leader>rvu",
     mapper_cmd_OR_function = "<cmd>CopilotChatReview<CR>",
     desc = "Make copilot read your buffer and review them and share the explanation"
+  },
+  {
+    mode = { "n" },
+    shortcut = "<leader>commit",
+    mapper_cmd_OR_function = "<cmd>CopilotChatCommit<CR>",
+    desc = "Make copilot review your changes and build up the commit message with more detailing"
   }
 }
 
