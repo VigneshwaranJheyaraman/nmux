@@ -10,6 +10,7 @@
 * [:warning:](#fyi)
 * [Fuzzy finder](#ripgrep)
 * [vim-dad-bod](#db)
+* [clojure + repl](#clojure-and-repl)
 * [tmux](#terminal-multipFLEXer)
 
 ### Prerequisites
@@ -122,4 +123,13 @@ Just run
 
 ```shell
 make setup
+```
+
+### Clojure and REPL
+
+REPL (Read Eval Print Loop), personally I am big of fan of it and given the immutable nature
+of `clojure` which I currently program with. the support for the same has been added here
+
+```shell
+make setup-clojure-config
 ```

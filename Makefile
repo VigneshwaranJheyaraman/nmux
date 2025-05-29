@@ -1,5 +1,5 @@
 package_manager = apt
-.PHONY: setup install-fonts install-nvim install-tmux setup-config setup-tmux-config setup-nvim-config pull-nmux
+.PHONY: setup install-fonts install-nvim install-tmux setup-config setup-tmux-config setup-nvim-config pull-nmux setup-clojure setup-clojure-config
 
 pull-nmux:
 	if [ -z "/home/$(whoami)/nmux" ]; then
@@ -32,9 +32,18 @@ setup-nvim-config: pull-nmux install-nvim
 setup-tmux-config: pull-nmux install-tmux
 	echo setting up tmux configuration
 	cd nmux
-	cp ./.tmux.conf ~/.config/.tmux.conf
+	ln -s ./.tmux.conf ~/.config/.tmux.conf
 
 setup-config: setup-tmux-config setup-nvim-config
+
+setup-clojure:
+	echo installing clojure
+	${package_manager} install clojure
+
+setup-clojure-config: setup-clojure
+	echo setting up clojure config
+	cp ./repl.deps.edn /home/$(whoami)/.clojure/deps.edn
+
 
 install-fonts:
 	${package_manager} install font-hack-nerd-font
