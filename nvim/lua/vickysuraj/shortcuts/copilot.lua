@@ -28,6 +28,20 @@ local shortcuts = {
     shortcut = "<leader>commit",
     mapper_cmd_OR_function = "<cmd>CopilotChatCommit<CR>",
     desc = "Make copilot review your changes and build up the commit message with more detailing"
+  },
+  {
+    mode = { "n" },
+    shortcut = "<leader>spd",
+    mapper_cmd_OR_function = function ()
+      local branch_name = vim.fn.input("Enter the branch name > ")
+      if branch_name == nil or branch_name == "" then
+        error("Branch name cannot be empty")
+      else
+        local review_context = "#revu:" .. branch_name
+        vim.cmd("CopilotChatNakeeran " .. review_context)
+      end
+    end,
+    desc = "Call Nakeeran who helps you analyze the PR changes my checking out the files locally and perform an analysis on the same"
   }
 }
 
