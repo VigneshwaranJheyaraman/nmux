@@ -45,3 +45,5 @@ end
 --set crosshair
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
+-- foldlevel
+vim.opt.foldmethod = "manual"

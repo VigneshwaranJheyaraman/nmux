@@ -9,4 +9,8 @@ require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
   }
 }
 
-require("vickysuraj.utils.clojure").setup_default_register()
+local clojure_utils = require("vickysuraj.utils.clojure")
+
+clojure_utils.setup_default_register()
+
+clojure_utils.enable_folding()

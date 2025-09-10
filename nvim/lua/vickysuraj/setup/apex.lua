@@ -1,6 +1,7 @@
 vim.filetype.add({
     extension= {
         cls  = "java",
-        trigger = "java"
+        trigger = "java",
+        cmp = "xml"
     }
 })

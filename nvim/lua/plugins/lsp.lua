@@ -8,7 +8,7 @@ return {
                 'saghen/blink.cmp',
 
                 -- use a release tag to download pre-built binaries
-                version = '*',
+                version = '1.*',
 
                 ---@module 'blink.cmp'
                 ---@type blink.cmp.Config
@@ -16,7 +16,7 @@ return {
                     keymap = { preset = 'default' },
 
                     appearance = {
-                        use_nvim_cmp_as_default = true,
+                        -- use_nvim_cmp_as_default = true,
 
                         -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
                         -- Adjusts spacing to ensure icons are aligned

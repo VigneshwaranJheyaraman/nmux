@@ -50,7 +50,11 @@ local function attach_lsp_bindings(event)
         mapper_cmd_OR_function = function() vim.diagnostic.goto_prev() end,
         opts = opts,
         desc = "go to previous diagnostic"
-
+      },
+      {
+        mode = "n",
+        shortcut = "<leader>sd",
+        mapper_cmd_OR_function = function() vim.diagnostic.show(bufnr) end,
       },
       {
         mode="n",

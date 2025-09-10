@@ -1,45 +1,30 @@
-local pluginUtils = require("vickysuraj.utils.plugin")
 local M = {}
 
+local function env_exists(var)
+  local env_val = os.getenv(var)
+  return env_val ~= nil and string.gsub(env_val, "%s+", "") ~= ""
+end
+
 local state = {
-  copilot = false,
+  copilot = env_exists("COPILOT")  or false,
   arrow_keys = false,
   have_swap_file = false,
-  shell = "/bin/zsh",
+  shell = os.getenv("SHELL") or "/bin/zsh",
   mouse = false,
-  default_theme = "zaibatsu",
+  default_theme = "tokyonight-storm",
 }
 
 local function hasKeyInMap(map, key)
   return vim.tbl_contains(vim.tbl_keys(map), key)
 end
 
--- @param configName string
+--- @param configName string
+--- @deprecated
 local function change_config(configName, configValue)
   if hasKeyInMap(state, configName) then
     state[configName] = configValue
   end
 end
-
-require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
-  shortcuts = {
-    {
-      mode = "n",
-      shortcut = "<leader>tcp",
-      mapper_cmd_OR_function = function()
-        local copilot_enabled = (not state.copilot)
-        local pluginName = "copilot"
-        change_config(pluginName, copilot_enabled)
-        if copilot_enabled then
-          pluginUtils.load_plugin(pluginName, nil)
-        end
-        pluginUtils.source_file("/after/plugin/copilot.lua")
-      end,
-      opts = { noremap = true, silent = true },
-      desc = "Toggle copilot",
-    }
-  }
-}
 
 M.get_config = function(configName)
   if hasKeyInMap(state, configName) then

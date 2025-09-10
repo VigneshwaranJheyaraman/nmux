@@ -138,6 +138,12 @@ local disable_arrow_key_mappings = {
     mapper_cmd_OR_function= "<nop>",
     opts = { noremap = true },
     desc = "disable arrow keys in insert mode"
+  },
+  {
+    mode="n",
+    shortcut= "<leader>bd",
+    mapper_cmd_OR_function= "<Esc>:bdelete %<CR>",
+    desc = "delete the current buffer"
   }
 };
 
