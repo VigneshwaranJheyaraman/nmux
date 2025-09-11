@@ -13,4 +13,4 @@ local clojure_utils = require("vickysuraj.utils.clojure")
 
 clojure_utils.setup_default_register()
 
-clojure_utils.enable_folding()
+require("vickysuraj.utils.lsp").enable_folding(true)

@@ -55,7 +55,7 @@ local buffer_shortcuts = {
     mode="n",
     shortcut= "<leader>f",
     mapper_cmd_OR_function= function()
-      if vim.lsp ~= nil then
+      if vim.lsp ~= nil and vim.lsp.buffer ~=nil then
         vim.lsp.buffer.format()
       end
     end,

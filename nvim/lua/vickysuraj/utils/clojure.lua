@@ -33,8 +33,4 @@ M.setup_default_register = function ()
   end
 end
 
-M.enable_folding = function ()
-  vim.opt.foldmethod = "indent";
-end
-
 return M

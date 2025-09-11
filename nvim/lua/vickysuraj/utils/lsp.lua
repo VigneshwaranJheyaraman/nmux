@@ -30,5 +30,9 @@ end
 
 M.required_langs = required_langs
 M.required_lsp = required_lsp
+--- @param doEnable boolean
+M.enable_folding = function (doEnable)
+  vim.opt.foldmethod = doEnable and "indent" or "manual"
+end
 
 return M
