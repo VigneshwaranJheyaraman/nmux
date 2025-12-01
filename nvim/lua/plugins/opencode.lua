@@ -27,7 +27,7 @@ return {
         },
         {
           mode = { "n", "x" },
-          shortcut = "<C-x>",
+          shortcut = "<leader>tool",
           mapper_cmd_OR_function = function() opencode.select() end,
           desc = "execute opencode action..."
         },
