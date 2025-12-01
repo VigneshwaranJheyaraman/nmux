@@ -12,5 +12,3 @@ require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
 local clojure_utils = require("vickysuraj.utils.clojure")
 
 clojure_utils.setup_default_register()
-
-require("vickysuraj.utils.lsp").enable_folding(true)

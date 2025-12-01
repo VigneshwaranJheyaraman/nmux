@@ -69,5 +69,13 @@ require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
       mapper_cmd_OR_function = function ()
         vim.cmd.Git("stash -m " .. os.date("%d-%m-%Y@%H:%M:%S"))
       end
+    },
+    {
+      mode = "n",
+      shortcut = "<leader>bout",
+      desc = "apply the stashed changes",
+      mapper_cmd_OR_function = function ()
+        vim.cmd.Git("stash pop")
+      end
     }}
   }

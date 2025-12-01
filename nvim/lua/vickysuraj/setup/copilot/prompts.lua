@@ -97,6 +97,11 @@ local custom_prompts = {
     ]],
     system_prompt = 'REVIEWER_BASE'
   },
+  Commit = {
+    prompt = [[
+    Write commit message for the change with commitizen convention. Keep the title under 50 characters and wrap message at 72 characters. Format as a gitcommit code block. If user has COMMIT_EDITMSG opened, generate replacement block for whole buffer. Explain in more detail about what was changed and why in the commit message also include the changelog entry for the change and have them wrapped within gitcommit code block
+    ]]
+  }
 }
 
 return custom_prompts

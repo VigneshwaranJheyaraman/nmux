@@ -46,4 +46,5 @@ end
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 -- foldlevel
-vim.opt.foldmethod = "manual"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"

@@ -1,6 +1,7 @@
 local M = {}
 local nvim_lsp = vim.lsp.config
 local shortcut_utils = require("vickysuraj.shortcuts.utils")
+local json_utils = require("vickysuraj.shortcuts.json")
 
 local function attach_lsp_bindings(event)
     local bufnr = event.buf
@@ -87,6 +88,8 @@ local function attach_lsp_bindings(event)
     }
 
     shortcut_utils.shortcuts_table_TO_keymaps{shortcuts =all_shortcuts}
+    -- setup json related shortcuts
+    json_utils.setup()
 end
 
 

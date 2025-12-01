@@ -1,1 +1,1 @@
-require("vickysuraj.utils.lsp").enable_folding(true)
+vim.opt.foldmethod="indent"

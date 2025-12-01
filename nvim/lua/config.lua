@@ -11,7 +11,7 @@ local state = {
   have_swap_file = false,
   shell = os.getenv("SHELL") or "/bin/zsh",
   mouse = false,
-  default_theme = "retrobox",
+  default_theme = "wildcharm",
 }
 
 local function hasKeyInMap(map, key)
