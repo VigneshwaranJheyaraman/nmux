@@ -1,12 +1,14 @@
 local M = {};
 local keymap = require("vickysuraj.setup.opencode.keymap");
+local contexts = require("vickysuraj.setup.opencode.context");
+local tmux_provider = require("vickysuraj.setup.opencode.providers.tmux")
 
 M.init = function()
   keymap.setup_keymap()
 end
 
 M.contexts = {
-  ["@staged"] = function(_) require("vickysuraj.setup.opencode.context"):staged() end
+  ["@staged"] = function(_) contexts:staged() end
 }
 
 M.prompts = {
@@ -15,5 +17,7 @@ M.prompts = {
     submit = true
   }
 }
+
+M.provider = tmux_provider
 
 return M

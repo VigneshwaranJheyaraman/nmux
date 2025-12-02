@@ -13,6 +13,7 @@ return {
       -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
       prompts = opencode_setup.prompts,
       contexts = opencode_setup.contexts,
+      provider = opencode_setup.provider,
     }
 
     -- Required for `opts.events.reload`.
