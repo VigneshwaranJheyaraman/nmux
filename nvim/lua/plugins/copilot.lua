@@ -1,6 +1,7 @@
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    cond = require("config").get_config("copilot"),
     dependencies = {
       { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
     },
