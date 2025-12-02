@@ -7,6 +7,8 @@
 * [Pre-requisites](#prerequisites)
   * [What is `lazy.nvim`](#lazy-nvim)
   * [Out of the box features](#features)
+  * [opencode](#opencode)
+  * [gh](#gh)
 * [:warning:](#fyi)
 * [Fuzzy finder](#ripgrep)
 * [vim-dad-bod](#db)
@@ -39,6 +41,17 @@ not loading all stuff on `nvim-open`. Also unlike `packer` which stores the `plu
 which has the plugins loaded we configured. Also `lazy.nvim` will allow isolation of
 plugins given their `install-configuration`. its awesome check it out!!!!
 
+#### opencode
+Cool stuff `opencode` is an awesome [TUI tool](https://github.com/sst/opencode) that helps LLM itengration from terminal and its awesome `#ThePrimeagen`, `#tjdevries` , `#dax` etc., made this happen.
+Also enabling its integration with `neovim` using [plugin](https://github.com/NickvanDyke/opencode.nvim)
+
+#### gh
+github's `gh` CLI tool will enable opencode to perform great functionalities with its integration natively built around Github which is really easy to get things done
+
+```bash
+make gh-install
+```
+
 #### Features
 * markdown-rendered
 * Language-Server for set of `programming-languages`. You can find the [here](https://github.com/VigneshwaranJheyaraman/nmux/blob/master/lua/vickysuraj/utils/)
@@ -58,6 +71,9 @@ Now `clone` [repo](https://github.com/VigneshwaranJheyaraman/nmux)
 ```shell
 $ cd ~
 $ git clone git@github.com/VigneshwaranJheyaraman:nmux ./config 
+$ curl -fsSL https://opencode.ai/install | bash
+$ PATH=$PATH:~/.opencode/bin
+$ opencode auth login
 ```
 
 Once the repository is cloned. The `config` is already in place kindly start `nvim`

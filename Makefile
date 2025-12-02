@@ -1,5 +1,5 @@
 package_manager = apt
-.PHONY: setup install-fonts install-nvim install-tmux setup-config setup-tmux-config setup-nvim-config pull-nmux setup-clojure setup-clojure-config
+.PHONY: setup install-fonts install-nvim install-tmux setup-config setup-tmux-config setup-nvim-config pull-nmux setup-clojure setup-clojure-config gh-install oc-install
 
 pull-nmux:
 	if [ -z "/home/$(whoami)/nmux" ]; then
@@ -48,4 +48,11 @@ setup-clojure-config: setup-clojure
 install-fonts:
 	${package_manager} install font-hack-nerd-font
 
-setup: setup-config install-fonts
+gh-install:
+	${package_manager} install gh
+
+oc-install:
+	${package_manager} install opencode
+
+setup: setup-config install-fonts oc-install gh-install
+
