@@ -84,6 +84,17 @@ local function attach_lsp_bindings(event)
         mapper_cmd_OR_function = function() vim.lsp.buf.signature_help() end,
         opts = opts,
         desc = "details of the variable under cursor"
+      },
+      {
+        mode = "n",
+        desc = "show all diagnostic across project",
+        mapper_cmd_OR_function = function()
+          vim.diagnostic.setqflist {
+            severity = 1,
+            title = "Project wise error(s)",
+          }
+        end,
+        shortcut = "<leader>pd"
       }
     }
 
@@ -99,15 +110,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 
-local lspconfig = require("lspconfig")
 local default_setup = function(server)
     local function find_root_dir()
       return vim.fn.getcwd()
     end
+    
+    -- Register the LSP configuration
     nvim_lsp(server, {
       root_dir = find_root_dir
     })
-    lspconfig[server].setup(nvim_lsp[server])
+    
+    -- Enable the LSP for relevant file types
+    vim.lsp.enable(server)
 end
 
 M.setup = function (opts)
@@ -115,13 +129,16 @@ M.setup = function (opts)
 
     local required_lsp = opts.required_lsp or {}
 
-    for _, lsp in ipairs(required_lsp) do
-      default_setup(lsp)
-    end
     require('mason').setup()
     require("mason-lspconfig").setup({
         ensure_installed = required_lsp,
-        automatic_enable = true
+        automatic_enable = true,
+        handlers = {
+          -- Default handler for all servers
+          function(server_name)
+            default_setup(server_name)
+          end
+        }
       });
     end
 
