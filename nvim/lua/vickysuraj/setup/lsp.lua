@@ -103,23 +103,21 @@ local function attach_lsp_bindings(event)
     json_utils.setup()
 end
 
-
 vim.api.nvim_create_autocmd("LspAttach", {
     desc = "neovim lsp configurations",
     callback = attach_lsp_bindings
 })
 
-
 local default_setup = function(server)
-    local function find_root_dir()
-      return vim.fn.getcwd()
+    local current_dir = vim.fn.getcwd()
+    local function find_root_dir(bufnr, on_dir)
+      on_dir(current_dir)
+      return current_dir
     end
-    
     -- Register the LSP configuration
     nvim_lsp(server, {
       root_dir = find_root_dir
     })
-    
     -- Enable the LSP for relevant file types
     vim.lsp.enable(server)
 end
@@ -128,18 +126,14 @@ M.setup = function (opts)
     opts = opts or {}
 
     local required_lsp = opts.required_lsp or {}
-
     require('mason').setup()
-    require("mason-lspconfig").setup({
-        ensure_installed = required_lsp,
-        automatic_enable = true,
-        handlers = {
-          -- Default handler for all servers
-          function(server_name)
-            default_setup(server_name)
-          end
-        }
-      });
+    require("mason-lspconfig").setup {
+      ensure_installed = required_lsp,
+      automatic_enable = false
+    }
+    for _, server_name in ipairs(required_lsp) do
+      default_setup(server_name)
     end
+  end
 
 return M

@@ -12,6 +12,7 @@ local state = {
   shell = os.getenv("SHELL") or "/bin/zsh",
   mouse = false,
   default_theme = "wildcharm",
+  local_model = vim.fn.executable("ollama") == 1
 }
 
 local function hasKeyInMap(map, key)
