@@ -1,0 +1,72 @@
+# https://github.com/odrobnik
+FROM deepseek-r1:1.5b
+
+TEMPLATE """
+{{- if .Messages }}
+    {{- if or .System .Tools }}system
+    {{- if .System }}
+        {{ .System }}
+    {{- end }}
+    {{- if .Tools }}
+
+        # Tools
+        
+        You may call one or more functions to assist with the user query.
+        
+        You are provided with function signatures within <tools></tools> XML tags:
+        <tools>
+            {{- range .Tools }}
+                {"type": "function", "function": {{ .Function }}}
+            {{- end }}
+        </tools>
+        
+        For each function call, return a JSON object with function name and arguments within <tool_call></tool_call> XML tags:
+        <tool_call>
+            {"name": <function-name>, "arguments": <args-json-object>}
+        </tool_call>
+    {{- end }}<｜end▁of▁sentence｜>
+{{ end }}
+
+{{- range $i, $_ := .Messages }}
+    {{- $last := eq (len (slice $.Messages $i)) 1 -}}
+    {{- if eq .Role "user" }}<｜begin▁of▁sentence｜>user
+        {{ .Content }}<｜end▁of▁sentence｜>
+
+    {{- else if eq .Role "assistant" }}<｜begin▁of▁sentence｜>assistant
+        {{- if .Content }}
+            {{ .Content }}
+        {{- end }}
+        {{- if .ToolCalls }}
+            <tool_call>
+                {{- range .ToolCalls }}
+                    {"name": "{{ .Function.Name }}", "arguments": {{ .Function.Arguments }}}
+                {{- end }}
+            </tool_call>
+        {{- end }}
+        {{- if not $last }}<｜end▁of▁sentence｜>{{ end }}
+
+        {{- else if eq .Role "tool" }}<｜begin▁of▁sentence｜>user
+            <tool_response>
+                {{ .Content }}
+            </tool_response><｜end▁of▁sentence｜>
+        {{- end }}
+
+        {{- if and (ne .Role "assistant") $last }}<｜begin▁of▁sentence｜>assistant
+        {{- end }}
+
+    {{- end }}
+
+    {{- else }}
+        {{- if .System }}<｜begin▁of▁sentence｜>system
+            {{ .System }}<｜end▁of▁sentence｜>
+        {{- end }}
+
+        {{- if .Prompt }}<｜begin▁of▁sentence｜>user
+            {{ .Prompt }}<｜end▁of▁sentence｜>
+        {{- end }}
+
+        <｜begin▁of▁sentence｜>assistant
+        {{ .Response }}
+        {{- if .Response }}<｜end▁of▁sentence｜>{{ end }}
+    {{- end }}
+"""

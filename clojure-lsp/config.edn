@@ -1,0 +1,11 @@
+{:source-aliases #{:dev :test :dev/headless}
+ :cljfmt         {:extra-indents {defstate [[:block 0]]
+                                  as->     [[:block 0]]
+                                  cond->   [[:block 0]]
+                                  cond->>  [[:block 0]]
+                                  com.brunobonacci.mulog/trace [[:inner 0]]
+                                  inquery.core/with-params [[:block 0]]}
+                  :alias-map {"µ" "com.brunobonacci.mulog"
+                              "q" "inquery.core"}
+                  :sort-ns-references? true
+                  :function-arguments-indentation :cursive}}
