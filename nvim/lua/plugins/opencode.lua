@@ -6,6 +6,7 @@ return {
     ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
     { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
   },
+  keys = { "<leader>ai" },
   config = function()
     local opencode_setup = require("vickysuraj.setup.opencode");
     ---@type opencode.Opts

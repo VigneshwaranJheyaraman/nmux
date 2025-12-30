@@ -18,7 +18,7 @@ return {
           {
             mode = "n",
             shortcut = "<leader>cs",
-            mapper_cmd_OR_function = function ()
+            mapper_cmd_OR_function = function()
               color_scheme.randomColorSchema()
             end,
             desc = "random color schema"
@@ -26,7 +26,7 @@ return {
           {
             mode = "n",
             shortcut = "<leader>pine",
-            mapper_cmd_OR_function = function ()
+            mapper_cmd_OR_function = function()
               color_scheme.ColorMyBash("rose-pine")
             end,
             desc = "rose-pine color schema"

@@ -6,12 +6,12 @@ local function env_exists(var)
 end
 
 local state = {
-  copilot = env_exists("COPILOT")  or false,
+  copilot = env_exists("COPILOT") or false,
   arrow_keys = false,
   have_swap_file = false,
   shell = os.getenv("SHELL") or "/bin/zsh",
   mouse = false,
-  default_theme = "wildcharm",
+  default_theme = "tokyonight-storm",
   local_model = vim.fn.executable("ollama") == 1
 }
 

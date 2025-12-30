@@ -3,5 +3,6 @@ return {
   opts = {},
   dependencies = {
     "nvim-lua/plenary.nvim",
-  }
+  },
+  ft = { "csv" }
 }

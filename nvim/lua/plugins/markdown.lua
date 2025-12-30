@@ -4,6 +4,7 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
-    opts = {}
+    opts = {},
+    ft = { "markdown" }
   }
 }

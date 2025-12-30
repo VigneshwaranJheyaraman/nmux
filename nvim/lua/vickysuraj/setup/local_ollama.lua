@@ -41,8 +41,12 @@ local function setup_prompts()
           .. [[ Write commit message for the change with commitizen convention.
           ## GUIDELINES
           - Keep the title under 50 characters and wrap message at 13000 characters.
-          - DO NOT JUMP INTO DEEP ANALYSIS
           - Given the staged changes analyze it and generate a detailed commit message
+          - The commitize convention MUST have
+            - <title>
+            - <body>
+            - <changelog>
+            - BREAKING_CHANGES if and only if any
           - Format as markdown.
           - Explain in more detail about what was changed and why in the commit message
           - Include the changelog entries for the changes and have them wrapped within gitcommit code block
@@ -63,7 +67,7 @@ M.setup = function()
     show_prompt = true,
     show_model = true,
     init = function()
-      vim.cmd("!ollama serve > /dev/null 2>&1 &")
+      vim.fn.execute("!ollama serve > /dev/null 2>&1 &", 'silent')
     end
   }
 
