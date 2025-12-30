@@ -11,7 +11,7 @@ local shortCuts = {
   {
     mapper_cmd_OR_function = ":Gen GenCommit<CR>",
     shortcut = "<leader>rama",
-    desc ="Understand the code and generate the commit message",
+    desc = "Understand the code and generate the commit message",
     mode = "n"
   }
 }
@@ -39,10 +39,15 @@ local function setup_prompts()
           .. "With previous history of changes made on the repository as mentioned below" .. "\n"
           .. previous_commits .. "\n"
           .. [[ Write commit message for the change with commitizen convention.
-          Keep the title under 50 characters and wrap message at 500 characters. Format as a gitcommit code block.
-          If user has COMMIT_EDITMSG opened, generate replacement block for whole buffer.
-          Explain in more detail about what was changed and why in the commit message
-          also include the changelog entry for the change and have them wrapped within gitcommit code block]]
+          ## GUIDELINES
+          - Keep the title under 50 characters and wrap message at 13000 characters.
+          - DO NOT JUMP INTO DEEP ANALYSIS
+          - Given the staged changes analyze it and generate a detailed commit message
+          - Format as markdown.
+          - Explain in more detail about what was changed and why in the commit message
+          - Include the changelog entries for the changes and have them wrapped within gitcommit code block
+
+          Make sure you follow the GUIDELINES]]
         )
       else
         return "No git enabled so cannot understand the code changes"
@@ -56,7 +61,10 @@ M.setup = function()
     model = "qwen3:4b",
     display_mode = "vertical-split",
     show_prompt = true,
-    show_model = true
+    show_model = true,
+    init = function()
+      vim.cmd("!ollama serve > /dev/null 2>&1 &")
+    end
   }
 
   setup_prompts()

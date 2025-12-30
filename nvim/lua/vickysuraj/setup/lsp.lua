@@ -3,7 +3,20 @@ local nvim_lsp = vim.lsp.config
 local shortcut_utils = require("vickysuraj.shortcuts.utils")
 local json_utils = require("vickysuraj.shortcuts.json")
 
+local function enable_formatting_if_exists(args)
+  -- Only attach format-on-save for LSPs that support the formatting method
+  if args.data and args.data.client_id and vim.lsp.get_client_by_id(args.data.client_id):supports_method("textDocument/formatting") then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = args.buf,
+      callback = function()
+        vim.lsp.buf.format({ async = false })
+      end,
+    })
+  end
+end
+
 local function attach_lsp_bindings(event)
+    enable_formatting_if_exists(event)
     local bufnr = event.buf
     local opts = {buffer = bufnr, remap = false}
 
