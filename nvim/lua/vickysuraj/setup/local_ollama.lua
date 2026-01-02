@@ -3,7 +3,7 @@ local genModule = require("gen")
 
 local shortCuts = {
   {
-    mapper_cmd_OR_function = ":Gen Ask<CR>",
+    mapper_cmd_OR_function = ":Gen Chat<CR>",
     shortcut = "<leader>lama",
     desc = "Start conversation with local model",
     mode = { "n", "v" }
@@ -13,6 +13,12 @@ local shortCuts = {
     shortcut = "<leader>rama",
     desc = "Understand the code and generate the commit message",
     mode = "n"
+  },
+  {
+    mode = "n",
+    desc = "load gen.nvim local ollama plugin",
+    mapper_cmd_OR_function = ":echo \"loading local-ollama plugin\"",
+    shortcut = "<leader>lai"
   }
 }
 
