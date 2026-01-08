@@ -42,9 +42,9 @@
                 "baseURL": "http://localhost:11434/v1"
             },
             "models": {
-                "dev-mistral": {
-                    "name": "Dev Mistral Coder 14B params",
-                    "id": "devstral"
+                "local": {
+                    "name": "Mistral 3 8B params",
+                    "id": "ministral-3"
                 }
             }
         }

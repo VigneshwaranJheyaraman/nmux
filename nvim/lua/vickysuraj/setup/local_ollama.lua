@@ -17,7 +17,7 @@ local shortCuts = {
   {
     mode = "n",
     desc = "load gen.nvim local ollama plugin",
-    mapper_cmd_OR_function = ":echo \"loading local-ollama plugin\"",
+    mapper_cmd_OR_function = ":echo \"loading local-ollama plugin\"<CR>",
     shortcut = "<leader>lai"
   }
 }
@@ -66,15 +66,22 @@ local function setup_prompts()
   }
 end
 
-M.setup = function()
+--- @class OllamaOpts
+--- @field model string|nil
+
+--- I setup the plugin
+--- @param plugin_opts OllamaOpts
+M.setup = function(plugin_opts)
+  assert(plugin_opts.model ~= nil, "make sure default model is provided")
   genModule.setup {
-    model = "qwen3:4b",
+    model = plugin_opts.model,
     display_mode = "vertical-split",
     show_prompt = true,
     show_model = true,
     init = function()
       vim.fn.execute("!ollama serve > /dev/null 2>&1 &", 'silent')
-    end
+    end,
+    debug = false
   }
 
   setup_prompts()
