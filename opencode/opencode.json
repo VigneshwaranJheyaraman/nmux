@@ -1,39 +1,52 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  "autoupdate": false,
-  "disabled_providers": ["opencode"],
-  "tools": {
-      "lsp": true
-  },
-  "permission": {
-      "edit": "ask"
-  },
-  "lsp": {
-      "clojure-lsp": {
-          "command": ["/Users/vjheya862/.local/share/nvim/mason/bin/clojure-lsp"],
-          "extensions": [".clj", ".cljs", ".cljc", ".edn"]
-      }
-  },
-  "mcp": {
-      "svelte": {
-          "type": "local",
-          "command": ["npx", "-y", "@sveltejs/mcp"],
-          "enabled": false
-      }
-  },
-  "provider": {
-      "ollama": {
-          "npm": "@ai-sdk/openai-compatible",
-          "name": "Ollama (local)",
-          "options": {
-              "baseURL": "http://localhost:11434/v1"
-          },
-          "models": {
-              "qwen3": {
-                  "name": "QWEN 4B params",
-                  "id": "qwen3:4b"
-              }
-          }
-      }
-  },
+    "$schema": "https://opencode.ai/config.json",
+    "autoupdate": false,
+    "disabled_providers": [
+        "opencode"
+    ],
+    "tools": {
+        "lsp": true
+    },
+    "permission": {
+        "edit": "ask"
+    },
+    "lsp": {
+        "clojure-lsp": {
+            "command": [
+                "/Users/vjheya862/.local/share/nvim/mason/bin/clojure-lsp"
+            ],
+            "extensions": [
+                ".clj",
+                ".cljs",
+                ".cljc",
+                ".edn"
+            ]
+        }
+    },
+    "mcp": {
+        "svelte": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@sveltejs/mcp"
+            ],
+            "enabled": false
+        }
+    },
+    "provider": {
+        "ollama": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "Ollama (local)",
+            "options": {
+                "baseURL": "http://localhost:11434/v1"
+            },
+            "models": {
+                "dev-mistral": {
+                    "name": "Dev Mistral Coder 14B params",
+                    "id": "devstral"
+                }
+            }
+        }
+    }
 }
