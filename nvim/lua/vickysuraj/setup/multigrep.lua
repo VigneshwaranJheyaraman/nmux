@@ -47,7 +47,7 @@ local live_multigrep = function(opts)
   }):find()
 end
 
-multigrep.setup = function()
+multigrep.setup = function(_)
   require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
     shortcuts = {
       {

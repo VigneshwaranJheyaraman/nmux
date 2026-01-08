@@ -6,10 +6,9 @@ return {
     dir = "/Users/vjheya862/Desktop/VJ/personal-contrib/gen.nvim",
     cond = default_local_model ~= nil,
     keys = { "<leader>lai" },
-    config = function()
-      require("vickysuraj.setup.local_ollama").setup {
-        model = default_local_model
-      }
-    end
+    main = "vickysuraj.setup.local_ollama",
+    opts = {
+      model = default_local_model
+    }
   }
 };

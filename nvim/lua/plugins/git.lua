@@ -1,8 +1,7 @@
 return {
-    {
-        'tpope/vim-fugitive',
-        config = function()
-            require("vickysuraj.setup.git")
-        end
-    }
+  {
+    'tpope/vim-fugitive',
+    main = "vickysuraj.setup.git",
+    config = true
+  }
 }
