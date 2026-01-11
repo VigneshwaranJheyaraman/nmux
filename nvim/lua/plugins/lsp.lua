@@ -1,12 +1,12 @@
 return {
   {
-    'williamboman/mason-lspconfig.nvim',
+    'neovim/nvim-lspconfig',
     main = "vickysuraj.setup.lsp",
     opts = {
       required_lsp = require("vickysuraj.utils.lsp").required_lsp
     }
   },
-  { 'neovim/nvim-lspconfig',   lazy = true },
+  { 'williamboman/mason-lspconfig.nvim', lazy = true },
   { 'williamboman/mason.nvim', lazy = true },
   {
     'saghen/blink.cmp',

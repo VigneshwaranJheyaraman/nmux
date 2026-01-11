@@ -6,14 +6,15 @@ return {
       'DBUIToggle',
       'DBUIAddConnection',
       'DBUIFindBuffer',
+      'StartDB'
     },
     init = function()
       -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
     end,
     main = "vickysuraj.setup.db",
-    opts = {}
+    opts = {},
   },
-  { 'tpope/vim-dadbod',                     lazy = true },
-  { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true }
+  { 'tpope/vim-dadbod',                     cmd = { "DBUI" } },
+  { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' } }
 }

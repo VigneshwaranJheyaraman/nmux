@@ -1,7 +1,7 @@
 local M = {}
 
 --- @class ShortcutDefinition
---- @field mode? string Vim mode for the keymap (default: "n")
+--- @field mode? string|table<string> Vim mode for the keymap (default: "n")
 --- @field shortcut string The key combination for the shortcut
 --- @field mapper_cmd_OR_function string|function Command string or function to execute
 --- @field opts? table Additional options to pass to vim.keymap.set
@@ -16,7 +16,7 @@ local M = {}
 
 --- Converts a table of shortcut definitions into Neovim keymaps
 --- @param keymaps_with_options KeymapsWithOptions
-M.shortcuts_table_TO_keymaps = function (keymaps_with_options)
+M.shortcuts_table_TO_keymaps = function(keymaps_with_options)
   local shortcuts_table = keymaps_with_options.shortcuts;
   local options = keymaps_with_options.options or {};
   local removeKeymap = options.removeKeymap or false
