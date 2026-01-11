@@ -2,7 +2,6 @@ local M = {}
 local nvim_lsp = vim.lsp.config
 local shortcut_utils = require("vickysuraj.shortcuts.utils")
 local json_utils = require("vickysuraj.shortcuts.json")
-local blink_lib = nil
 
 local function enable_formatting_if_exists(args)
   -- Only attach format-on-save for LSPs that support the formatting method
@@ -18,9 +17,7 @@ end
 
 local function attach_lsp_bindings(event)
   enable_formatting_if_exists(event)
-  if blink_lib == nil then
-    blink_lib = require("blink.cmp")
-  end
+  require("blink.cmp")
   local bufnr = event.buf
   local opts = { buffer = bufnr, remap = false }
 
