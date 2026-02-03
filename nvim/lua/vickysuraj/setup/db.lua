@@ -11,6 +11,9 @@ M.setup = function(_)
   -- $ export DB_<ENV> = <DB_NAME>://<USER>:<PASSWORD>@<HOST>:<PORT>/<DB_NAME>
   -- ```
 
+  -- require blink for autocompletion
+  require("blink.cmp")
+
   -- default query saving location
   vim.g.db_ui_save_location = vim.fn.stdpath("data") .. "/queries"
   -- donot execute on save its kind of annoying

@@ -9,7 +9,7 @@ local function setup_lua_ls()
         path = runtime_path
       },
       diagnostics = {
-        globals = {'vim'},
+        globals = { 'vim' },
       },
       workspace = {
         library = {
