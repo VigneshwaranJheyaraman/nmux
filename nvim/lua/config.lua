@@ -22,7 +22,7 @@ local state = {
   have_swap_file = false,
   shell = os.getenv("SHELL") or "/bin/zsh",
   mouse = false,
-  default_theme = "murphy",
+  default_theme = "koda",
   local_model = get_default_local_model()
 }
 

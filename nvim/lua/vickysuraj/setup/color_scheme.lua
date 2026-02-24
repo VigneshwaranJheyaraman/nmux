@@ -8,6 +8,17 @@ for _, fullpath in pairs(schemes_available) do
   table.insert(color_schemes, vim.fn.fnamemodify(fullpath, ":t:r"))
 end
 
+M.load_theme = function()
+  local default_theme = require("config").get_config("default_theme")
+  local ok_to_change_colorschema, err = pcall(function()
+    M.ColorMyBash(default_theme)
+  end)
+  if not ok_to_change_colorschema then
+    vim.notify("Cannot set color-scheme: " .. err, vim.log.levels.DEBUG)
+    M.randomColorSchema()
+  end
+end
+
 M.ColorMyBash = function(color)
   color = color or "rose-pine"
   vim.cmd.colorscheme(color)
@@ -17,7 +28,7 @@ M.randomColorSchema = function()
   M.ColorMyBash(color_schemes[math.random(#color_schemes)])
 end
 
-M.setup = function(_)
+M.setup = function(opts)
   require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
     shortcuts = {
       {
@@ -38,7 +49,7 @@ M.setup = function(_)
       }
     }
   }
-  M.ColorMyBash(require("config").get_config("default_theme"))
+  M.load_theme(opts)
 end
 
 return M

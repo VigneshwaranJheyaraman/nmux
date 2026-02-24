@@ -8,6 +8,7 @@ return {
     config = true
   },
   { 'nvim-lua/plenary.nvim',                    lazy = true },
+  { "folke/todo-comments.nvim",                 lazy = true },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
 
 }

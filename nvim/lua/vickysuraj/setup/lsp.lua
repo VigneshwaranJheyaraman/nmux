@@ -142,7 +142,7 @@ M.setup = function(opts)
   local required_lsp = opts.required_lsp or {}
   require('mason').setup()
   require("mason-lspconfig").setup {
-    -- ensure_installed = required_lsp,
+    ensure_installed = required_lsp,
     -- automatic_enable = false
   }
   for _, server_name in ipairs(required_lsp) do

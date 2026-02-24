@@ -7,7 +7,7 @@ M.format_json = function(jq_command)
     jq_command = jq_command or ""
     vim.cmd("'<,'>!jq" .. jq_command)
     if vim.bo.filetype == nil or vim.bo.filetype ~= "json" or vim.bo.filetype == "" then
-      vim.bo.filetype ="json"
+      vim.cmd(":setlocal ft=json")
     end
   end
 end

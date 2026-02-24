@@ -1,7 +1,8 @@
 local M = {};
 local keymap = require("vickysuraj.setup.opencode.keymap");
 local contexts = require("vickysuraj.setup.opencode.context");
-local tmux_provider = require("vickysuraj.setup.opencode.providers.tmux")
+local Tmux = require("vickysuraj.setup.opencode.providers.tmux")
+local tmux = Tmux:new()
 
 M.contexts = {
   ["@staged"] = function(_) contexts:staged() end
@@ -26,14 +27,22 @@ M.setup = function(_)
     -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
     prompts = M.prompts,
     contexts = M.contexts,
-    provider = M.provider,
+    server = {
+      start = function()
+        tmux:start()
+      end,
+      stop = function()
+        tmux:stop()
+      end,
+      toggle = function()
+        tmux:toggle()
+      end
+    }
   }
 
   -- Required for `opts.events.reload`.
   vim.o.autoread = true
   keymap.setup_keymap()
 end
-
-M.provider = tmux_provider
 
 return M

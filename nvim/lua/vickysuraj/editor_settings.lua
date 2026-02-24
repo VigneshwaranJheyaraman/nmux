@@ -37,9 +37,9 @@ vim.opt.colorcolumn = "80"
 vim.opt.shell = config.get_config("shell")
 
 if config.get_config("mouse") then
-  vim.opt.mouse="a"
+  vim.opt.mouse = "a"
 else
-  vim.opt.mouse=""
+  vim.opt.mouse = ""
 end
 
 --set crosshair

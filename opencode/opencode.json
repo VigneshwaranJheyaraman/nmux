@@ -32,6 +32,14 @@
                 "@sveltejs/mcp"
             ],
             "enabled": false
+        },
+        "aws": {
+            "type": "local",
+            "command": [
+                "uvx",
+                "awslabs.core-mcp-server@latest"
+            ],
+            "enabled": false
         }
     },
     "provider": {
