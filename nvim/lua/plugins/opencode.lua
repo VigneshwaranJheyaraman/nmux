@@ -18,6 +18,5 @@ return {
   {
     "folke/snacks.nvim",
     opts = { input = {}, picker = {}, terminal = {} },
-    keys = { "<leader>ai" }
   },
 }

@@ -56,7 +56,8 @@ function Tmux:start()
     -- Create new pane
     local detach_flag = self.opts.focus and "" or "-d"
     self.pane_id = vim.fn.system(
-      string.format("tmux split-window -h %s -P -F '#{pane_id}' %s '%s'", detach_flag, self.opts.options or "", self.cmd)
+      string.format("tmux split-window -c %q -h %s -P -F '#{pane_id}' %s '%s'", vim.fn.getcwd(), detach_flag,
+        self.opts.options or "", self.cmd)
     )
     local disable_passthrough = self.opts.allow_passthrough ~= true -- default true (disable passthrough)
     if disable_passthrough and self.pane_id and self.pane_id ~= "" then

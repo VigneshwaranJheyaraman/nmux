@@ -1,3 +1,19 @@
+local prompt_util = require("vickysuraj.utils.input")
+
+--- @param on_input function
+local function session_modifier(on_input)
+  prompt_util.ask {
+    prompt = "Session Name:",
+    on_confirm = function(session_name)
+      if session_name ~= nil and #session_name > 0 then
+        on_input(session_name)
+      else
+        print("No session inputed")
+      end
+    end
+  }
+end
+
 require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
   shortcuts = {
     {
@@ -18,9 +34,10 @@ require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
       mode = "n",
       shortcut = "<leader>tnew",
       mapper_cmd_OR_function = function()
-        local session_name = vim.fn.input("Session Name:")
-        -- open as a daemon
-        vim.cmd("silent !tmux new-session -c $VJ_HOME -s " .. session_name .. " -d")
+        session_modifier(function(session_name)
+          -- open as a daemon
+          vim.cmd("silent !tmux new-session -c $VJ_HOME -s " .. session_name .. " -d")
+        end)
       end,
       desc = "creates a new session"
     },
@@ -28,8 +45,9 @@ require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
       mode = "n",
       shortcut = "<leader>sess",
       mapper_cmd_OR_function = function()
-        local session_name = vim.fn.input("Session Name:")
-        vim.cmd("!tmux switch -t " .. session_name)
+        session_modifier(function(session_name)
+          vim.cmd("!tmux switch -t " .. session_name)
+        end)
       end,
       desc = "swaps between session"
     },
@@ -37,8 +55,9 @@ require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
       mode = "n",
       shortcut = "<leader>tkill",
       mapper_cmd_OR_function = function()
-        local session_name = vim.fn.input("Session Name:")
-        vim.cmd("silent! tmux kill-session -t " .. session_name)
+        session_modifier(function(session_name)
+          vim.cmd("silent! tmux kill-session -t " .. session_name)
+        end)
       end,
       desc = "swaps between session"
     }

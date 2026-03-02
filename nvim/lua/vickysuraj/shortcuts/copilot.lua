@@ -1,21 +1,22 @@
+local prompt_util = require("vickysuraj.utils.input")
 local shortcuts = {
   {
     mode = "n",
     shortcut = "<leader>chat",
     mapper_cmd_OR_function = "<cmd>CopilotChat<CR>",
-    desc ="Open the copilot chat"
+    desc = "Open the copilot chat"
   },
   {
     mode = { "n", "v" },
     shortcut = "<leader>fix",
     mapper_cmd_OR_function = "<cmd>CopilotChatFix<CR>",
-    desc ="Make copilot read your buffer and fix the possible issues"
+    desc = "Make copilot read your buffer and fix the possible issues"
   },
   {
     mode = { "n", "v" },
     shortcut = "<leader>prom",
     mapper_cmd_OR_function = "<cmd>CopilotChatPrompts<CR>",
-    desc ="Make copilot read your buffer and fix the possible issues"
+    desc = "Make copilot read your buffer and fix the possible issues"
   },
   {
     mode = { "n", "v" },
@@ -32,16 +33,21 @@ local shortcuts = {
   {
     mode = { "n" },
     shortcut = "<leader>spd",
-    mapper_cmd_OR_function = function ()
-      local branch_name = vim.fn.input("Enter the branch name > ")
-      if branch_name == nil or branch_name == "" then
-        error("Branch name cannot be empty")
-      else
-        local review_context = "#revu:" .. branch_name
-        vim.cmd("CopilotChatNakeeran " .. review_context)
-      end
+    mapper_cmd_OR_function = function()
+      prompt_util.ask {
+        prompt = "Enter the branch name > ",
+        on_confirm = function(branch_name)
+          if branch_name == nil or branch_name == "" then
+            error("Branch name cannot be empty")
+          else
+            local review_context = "#revu:" .. branch_name
+            vim.cmd("CopilotChatNakeeran " .. review_context)
+          end
+        end
+      }
     end,
-    desc = "Call Nakeeran who helps you analyze the PR changes my checking out the files locally and perform an analysis on the same"
+    desc =
+    "Call Nakeeran who helps you analyze the PR changes my checking out the files locally and perform an analysis on the same"
   }
 }
 

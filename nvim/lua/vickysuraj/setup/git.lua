@@ -1,3 +1,4 @@
+local prompt_utils = require("vickysuraj.utils.input")
 local function checkout_master(opts)
   opts = opts or {}
   local branch_name = opts.branch_name
@@ -46,14 +47,16 @@ M.setup = function(_)
         mode = "n",
         shortcut = "<leader>gch",
         mapper_cmd_OR_function = function()
-          local branch_name = vim.fn.input {
-            prompt = "branch name:"
+          prompt_utils.ask {
+            prompt = "branch name:",
+            on_confirm = function(branch_name)
+              if branch_name ~= nil or branch_name ~= "" then
+                checkout_master {
+                  branch_name = branch_name
+                }
+              end
+            end
           }
-          if branch_name ~= nil or branch_name ~= "" then
-            checkout_master {
-              branch_name = branch_name
-            }
-          end
         end,
         desc = "checkout branch"
       },
