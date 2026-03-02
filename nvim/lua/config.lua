@@ -1,8 +1,17 @@
 local M = {}
 
+local function getenv(env_name)
+  local env_value = string.gsub(string.gsub(vim.fn.system("echo $" .. env_name), "\n", ""), "%s+", "")
+  if env_value ~= "" or env_value ~= nil then
+    return env_value
+  else
+    return nil
+  end
+end
+
 local function env_exists(var)
-  local env_val = os.getenv(var)
-  return env_val ~= nil and string.gsub(env_val, "%s+", "") ~= ""
+  local env_val = getenv(var)
+  return env_val ~= nil and env_val ~= ""
 end
 
 --- checks if ollama exists and then return a default model
@@ -24,7 +33,7 @@ local state = {
   mouse = false,
   default_theme = "koda",
   local_model = get_default_local_model(),
-  prompt_path = os.getenv("PROMPTS_PATH")
+  prompt_path = getenv("PROMPTS_PATH")
 }
 
 local function hasKeyInMap(map, key)
