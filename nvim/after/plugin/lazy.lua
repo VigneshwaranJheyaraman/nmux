@@ -8,3 +8,5 @@ theme.setup {
 
 -- require snancks.input for better input ui
 require("snacks")
+-- setup llm prompts
+require("vickysuraj.setup.llm")

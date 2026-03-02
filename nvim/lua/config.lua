@@ -23,7 +23,8 @@ local state = {
   shell = os.getenv("SHELL") or "/bin/zsh",
   mouse = false,
   default_theme = "koda",
-  local_model = get_default_local_model()
+  local_model = get_default_local_model(),
+  prompt_path = os.getenv("PROMPTS_PATH")
 }
 
 local function hasKeyInMap(map, key)

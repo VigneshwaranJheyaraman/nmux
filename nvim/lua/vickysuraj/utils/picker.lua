@@ -7,7 +7,7 @@ local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
 --- @class PickerOpts
---- @field options table<string>
+--- @field options function<table<string>>
 --- @field on_select function
 --- @field title string?
 
@@ -17,8 +17,8 @@ local function on_select(post_select)
   return function(bufnr)
     local selected_value = action_state.get_selected_entry()
     if selected_value then
-      post_select(selected_value[1])
       actions.close(bufnr)
+      post_select(selected_value[1])
     end
   end
 end
@@ -31,9 +31,8 @@ M.open_picker = function(opts)
     },
     {
       prompt_title = opts.title or "Select",
-      push_cursor_on_edit = true,
       finder = finders.new_table {
-        results = opts.options
+        results = opts.options()
       },
       sorter = conf.generic_sorter {},
       attach_mappings = function()

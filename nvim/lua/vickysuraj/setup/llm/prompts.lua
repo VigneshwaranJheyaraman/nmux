@@ -1,6 +1,6 @@
 local picker_utils = require("vickysuraj.utils.picker")
 local prompt_utils = require("vickysuraj.utils.input")
-local shortcut_utils = require("lua.vickysuraj.shortcuts.utils")
+local shortcut_utils = require("vickysuraj.shortcuts.utils")
 local M = {}
 local is_enabled = true
 --- @type table<string, string>
@@ -8,7 +8,7 @@ local available_prompts = {}
 
 local function get_all_prompts()
   local prompt_names = {}
-  for name, _ in ipairs(available_prompts) do
+  for name, _ in pairs(available_prompts) do
     table.insert(prompt_names, name)
   end
   return prompt_names
@@ -23,10 +23,12 @@ local default_opts = {
 --- @param extension_glob string
 local function find_prompts(dir, extension_glob)
   if vim.fn.isdirectory(dir) then
-    for file_name in vim.split(vim.fn.glob(dir .. "/" .. extension_glob), "\n", { trimempty = true }) do
-      local file_handler = io.open(dir .. "/" .. file_name, "rb")
-      assert(file_handler ~= nil, "Cannot open file " .. file_name)
-      available_prompts[file_name] = file_handler:read("*all")
+    for _, file_location in ipairs(vim.split(vim.fn.glob(dir .. "/" .. extension_glob), "\n", { trimempty = true })) do
+      local file_handler = io.open(file_location, "rb")
+      if file_handler ~= nil then
+        available_prompts[file_location] = file_handler:read("*all")
+        file_handler:close()
+      end
     end
   else
     is_enabled = false
@@ -38,21 +40,18 @@ local function setupKeyMaps()
   shortcut_utils.shortcuts_table_TO_keymaps {
     shortcuts = {
       {
-        shortcut = "<leader>prompts",
+        shortcut = "<leader>pllm",
         mapper_cmd_OR_function = function()
           picker_utils.open_picker {
             title = "Select the markdown",
             on_select = M.build_prompt,
-            options = get_all_prompts()
+            options = get_all_prompts
           }
         end,
         desc = "list all the prompts and select one of the them",
         mode = "n"
       }
     },
-    options = {
-      removeKeymap = true
-    }
   }
 end
 
@@ -61,7 +60,7 @@ local function copy_prompt_to_clipboard(prompt, prompt_vars)
   for i, prompt_var in ipairs(prompt_vars_list) do
     prompt = string.gsub(prompt, "$" .. i, prompt_var)
   end
-  vim.cmd("!silent pbcopy " .. prompt)
+  vim.fn.system("pbcopy", prompt)
 end
 
 --- @class PromptOpts
@@ -92,3 +91,5 @@ M.setup = function(opts)
     setupKeyMaps()
   end
 end
+
+return M

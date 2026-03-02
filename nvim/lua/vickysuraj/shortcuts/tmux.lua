@@ -1,4 +1,9 @@
 local prompt_util = require("vickysuraj.utils.input")
+local picker_utils = require("vickysuraj.utils.picker")
+
+local function get_all_sessions()
+  return vim.split(vim.fn.system("tmux list-sessions -F '#{session_name}'"), "\n", { trimempty = true })
+end
 
 --- @param on_input function
 local function session_modifier(on_input)
@@ -45,9 +50,13 @@ require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
       mode = "n",
       shortcut = "<leader>sess",
       mapper_cmd_OR_function = function()
-        session_modifier(function(session_name)
-          vim.cmd("!tmux switch -t " .. session_name)
-        end)
+        picker_utils.open_picker {
+          on_select = function(session_name)
+            vim.cmd("!tmux switch -t " .. session_name)
+          end,
+          options = get_all_sessions,
+          title = "Select available sessions"
+        }
       end,
       desc = "swaps between session"
     },
