@@ -1,12 +1,29 @@
 local prompt_utils = require("vickysuraj.utils.input")
+local picker_utils = require("vickysuraj.utils.picker")
+
+--- @class CheckoutOpts
+--- @field branch_name string?
+--- @field new_branch boolean?
+
+
+--- @param opts CheckoutOpts
 local function checkout_master(opts)
   opts = opts or {}
+  local is_new_branch = opts.new_branch == true
   local branch_name = opts.branch_name
   if branch_name == nil or branch_name == ""
   then
     branch_name = "master"
   end
+  if is_new_branch then
+    branch_name = "-b " .. branch_name
+  end
   vim.cmd("silent! Git checkout " .. branch_name)
+end
+
+--- @return table<string>
+local function list_all_branch()
+  return vim.split(vim.fn.system("git branch --list"), "\n", { trimempty = true })
 end
 
 local M = {}
@@ -38,10 +55,27 @@ M.setup = function(_)
         mode = "n",
         shortcut = "<leader>gpom",
         mapper_cmd_OR_function = function()
-          checkout_master()
+          checkout_master {
+          }
           vim.cmd.Git("pull origin master")
         end,
         desc = "pull origin master"
+      },
+      {
+        mode = "n",
+        shortcut = "<leader>gcb",
+        desc = "checkout branch",
+        mapper_cmd_OR_function = function()
+          picker_utils.open_picker {
+            options = list_all_branch,
+            title = "Select branch",
+            on_select = function(branch_name)
+              checkout_master {
+                branch_name = branch_name
+              }
+            end
+          }
+        end
       },
       {
         mode = "n",
@@ -51,14 +85,16 @@ M.setup = function(_)
             prompt = "branch name:",
             on_confirm = function(branch_name)
               if branch_name ~= nil or branch_name ~= "" then
+                checkout_master {}
                 checkout_master {
-                  branch_name = branch_name
+                  branch_name = branch_name,
+                  new_branch = true
                 }
               end
             end
           }
         end,
-        desc = "checkout branch"
+        desc = "checkout new branch"
       },
       {
         mode = "n",
