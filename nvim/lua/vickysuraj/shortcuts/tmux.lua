@@ -64,9 +64,13 @@ require("vickysuraj.shortcuts.utils").shortcuts_table_TO_keymaps {
       mode = "n",
       shortcut = "<leader>tkill",
       mapper_cmd_OR_function = function()
-        session_modifier(function(session_name)
-          vim.cmd("silent! tmux kill-session -t " .. session_name)
-        end)
+        picker_utils.open_picker {
+          on_select = function(session_name)
+            vim.cmd("silent! tmux kill-session -t " .. session_name)
+          end,
+          options = get_all_sessions,
+          title = "Kill session"
+        }
       end,
       desc = "swaps between session"
     }

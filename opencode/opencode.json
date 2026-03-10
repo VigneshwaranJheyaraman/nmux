@@ -40,6 +40,15 @@
                 "awslabs.core-mcp-server@latest"
             ],
             "enabled": false
+        },
+        "vaathiyaar": {
+            "type": "local",
+            "command": [
+                "bash",
+                "-c",
+                "cd /Users/vjheya862/Desktop/comcast/llm\\(s\\)/vaathiyaar && make mcp",
+            ],
+            "enabled": false
         }
     },
     "provider": {
