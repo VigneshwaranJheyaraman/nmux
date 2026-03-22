@@ -7,7 +7,12 @@ return {
     }
   },
   { 'williamboman/mason-lspconfig.nvim', lazy = true },
-  { 'williamboman/mason.nvim', lazy = true },
+  { 'williamboman/mason.nvim',           lazy = true },
+  {
+    'saghen/blink.compat',
+    version = '2.*',
+    lazy = true
+  },
   {
     'saghen/blink.cmp',
 

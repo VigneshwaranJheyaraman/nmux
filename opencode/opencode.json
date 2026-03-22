@@ -8,7 +8,10 @@
         "lsp": true
     },
     "permission": {
-        "edit": "ask"
+        "edit": {
+            "*": "ask",
+            "/tmp/*": "allow"
+        }
     },
     "lsp": {
         "clojure-lsp": {
@@ -41,14 +44,15 @@
             ],
             "enabled": false
         },
-        "vaathiyaar": {
+        "professor": {
             "type": "local",
             "command": [
                 "bash",
                 "-c",
                 "cd /Users/vjheya862/Desktop/comcast/llm\\(s\\)/vaathiyaar && make mcp",
             ],
-            "enabled": false
+            "enabled": true,
+            "timeout": 86400000
         }
     },
     "provider": {
