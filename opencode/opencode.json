@@ -10,6 +10,10 @@
     "permission": {
         "edit": {
             "*": "ask",
+            "/tmp/*": "allow",
+        },
+        "external_directory": {
+            "*": "ask",
             "/tmp/*": "allow"
         }
     },

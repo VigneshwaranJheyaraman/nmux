@@ -13,6 +13,12 @@ local function setup_key_mapping(lib_99)
       {
         mode = "v",
         shortcut = "<leader>99",
+        mapper_cmd_OR_function = lib_99.visual_analyze,
+        desc = "I try to understand 99 problems"
+      },
+      {
+        mode = "v",
+        shortcut = "<leader>99r",
         mapper_cmd_OR_function = lib_99.visual,
         desc = "I got 99 problems"
       },
