@@ -24,6 +24,9 @@ M.setup = function(opts)
   local config = require("config")
   local local_model = config.get_config("local_model")
   local ai_provider = "custom_cmd"
+  local professor_core = require("vickysuraj.professor.core")
+  local ai_command = { cmd = "call_professor_for_code_review", args = { professor_core.make_default_ask_url() } }
+  local opencode_cmd = { cmd = "opencode", args = { "run", "--model", opts.model, "--agent", "build" } }
   -- if local_model then
   --   ai_provider = "ollama"
   -- end
@@ -67,8 +70,7 @@ M.setup = function(opts)
       max_file_size = 500,         -- skip files larger than N lines (0 = unlimited)
 
       ollama        = { model = local_model, base_url = "http://localhost:11434", },
-      -- TODO: fix this it breaks
-      custom_cmd    = { cmd = "opencode", args = { "run", "--model", opts.model, "--agent", "build" } },
+      custom_cmd    = ai_command,
     },
 
     -- Override or disable keybindings

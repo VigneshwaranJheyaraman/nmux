@@ -1,4 +1,5 @@
 local shortcut_utils = require("vickysuraj.shortcuts.utils")
+local professor_99 = require("vickysuraj.professor.99")
 
 --- I am the opts that can be passed to setup
 --- @class SetupOpts99
@@ -24,13 +25,13 @@ local function setup_key_mapping(lib_99)
       },
       {
         mode = "n",
-        shortcut = "<leader>9x",
+        shortcut = "<leader>99x",
         mapper_cmd_OR_function = lib_99.stop_all_requests,
         desc = "99 problems! get that hell outta here"
       },
       {
         mode = "n",
-        shortcut = "<leader>99s",
+        shortcut = "<leader>99",
         mapper_cmd_OR_function = lib_99.search,
         desc = "I don't want peace I want problems"
       }
@@ -47,7 +48,7 @@ M.setup = function(opts)
   M.path_99 = opts.path .. "/" .. M.project_directory
 
   _99.setup {
-    provider = _99.Providers.OpenCodeProvider,
+    provider = professor_99.make_provider(),
     model = "github-copilot/claude-haiku-4.5",
     logger = {
       level = _99.DEBUG,
