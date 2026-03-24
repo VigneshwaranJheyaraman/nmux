@@ -1,7 +1,7 @@
 return {
   {
-    --"ThePrimeagen/99",
-    dir = "/Users/vjheya862/Desktop/comcast/VJ/personal-contribs/99",
+    "VigneshwaranJheyaraman/99",
+    branch = "support_llm_response_replace_with_ouput_window",
     main = "vickysuraj.setup.99",
     opts = {
       path = "/tmp",
