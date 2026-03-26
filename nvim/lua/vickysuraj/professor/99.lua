@@ -65,6 +65,16 @@ M.make_provider = function()
       str = context.provider_stdout
     end
     logger:debug("retrieve_results", "results", str)
+    pcall(function()
+      local file = io.open(context.tmp_file, "w")
+      if file then
+        file:write(str)
+        file:close()
+        logger:debug("saved prompt to file", "path", file)
+      else
+        logger:error("failed to save prompt", "path", file)
+      end
+    end)
 
     return true, str
   end
