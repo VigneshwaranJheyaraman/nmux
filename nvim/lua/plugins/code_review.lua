@@ -1,6 +1,8 @@
 return {
   {
-    "afewyards/codereview.nvim",
+    --"afewyards/codereview.nvim",
+    "VigneshwaranJheyaraman/codereview.nvim",
+    branch = "support_prompt_building",
     dependencies = { "nvim-lua/plenary.nvim", lazy = true },
     keys = {
       "<leader>revu",

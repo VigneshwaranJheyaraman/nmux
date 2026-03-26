@@ -14,6 +14,7 @@ local function setup_lua_ls()
       workspace = {
         library = {
           vim.env.VIMRUNTIME,
+          vim.fn.stdpath("data") .. "/lazy"
         },
         checkThirdParty = false,
       },

@@ -3,7 +3,7 @@
   "CopilotChat.nvim": { "branch": "main", "commit": "1d8aa27e2317950b0b7ddc023487c6f2b7b074ca" },
   "blink.cmp": { "branch": "main", "commit": "4b18c32adef2898f95cdef6192cbd5796c1a332d" },
   "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
-  "codereview.nvim": { "branch": "main", "commit": "5be54ca629919ec4eab353549bae4fce662db70d" },
+  "codereview.nvim": { "branch": "support_prompt_building", "commit": "f34f7bea319ae903aee1afbe933b0b920adf274e" },
   "conjure": { "branch": "main", "commit": "c2403ba9c42fd5a87a7b474f4f655978d4063d99" },
   "copilot.vim": { "branch": "release", "commit": "c2c435419e081a87e909e8979c66d874e75e4155" },
   "data-viewer.nvim": { "branch": "main", "commit": "40ddf37bb7ab6c04ff9e820812d1539afe691668" },
