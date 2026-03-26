@@ -3,17 +3,6 @@ local M = {}
 --- @class CodeReviewOpts
 --- @field model string
 
----@diagnostic disable-next-line: undefined-doc-name
---- @param review codereview.providers.types.PullRequest
---- @return table<string>
-local function add_context_to_professor(review)
-  local prompts = {}
-  if review and review.repo and review.id then
-    table.insert(prompts, "/pr " .. review.repo .. ":" .. tostring(review.id))
-  end
-  return prompts
-end
-
 local function setup_key_maps()
   local shortcut_utils = require("vickysuraj.shortcuts.utils")
   shortcut_utils.shortcuts_table_TO_keymaps {
@@ -80,14 +69,13 @@ M.setup = function(opts)
 
     -- AI review
     ai           = {
-      enabled        = true,
-      provider       = ai_provider, -- "claude_cli" | "anthropic" | "openai" | "ollama" | "custom_cmd"
-      review_level   = "info",      -- "info" | "suggestion" | "warning" | "error"
-      max_file_size  = 500,         -- skip files larger than N lines (0 = unlimited)
+      enabled       = true,
+      provider      = ai_provider,  -- "claude_cli" | "anthropic" | "openai" | "ollama" | "custom_cmd"
+      review_level  = "info",       -- "info" | "suggestion" | "warning" | "error"
+      max_file_size = 500,          -- skip files larger than N lines (0 = unlimited)
 
-      ollama         = { model = local_model, base_url = "http://localhost:11434", },
-      custom_cmd     = ai_command,
-      prompt_builder = add_context_to_professor
+      ollama        = { model = local_model, base_url = "http://localhost:11434", },
+      custom_cmd    = ai_command
     },
 
     -- Override or disable keybindings
