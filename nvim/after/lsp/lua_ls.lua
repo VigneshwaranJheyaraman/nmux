@@ -13,8 +13,7 @@ local function setup_lua_ls()
       },
       workspace = {
         library = {
-          vim.env.VIMRUNTIME,
-          vim.fn.stdpath("data") .. "/lazy"
+          vim.env.VIMRUNTIME
         },
         checkThirdParty = false,
       },

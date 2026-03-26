@@ -7,5 +7,5 @@ jq -Rs '{"query": ., "model": "claude-haiku-4.5"}' \
      -H 'content-type: application/json' \
      -H 'user-id: b9ec6bcb-1ecb-4e78-a55d-96099aca3203' \
      -H 'X-prof: naanum rowdy dhaan' \
-     --data-binary @- \
+     --data-raw @- \
   | jq -rc '.message.response'

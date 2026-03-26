@@ -1,6 +1,7 @@
 return {
   {
-    "afewyards/codereview.nvim",
+    "VigneshwaranJheyaraman/codereview.nvim",
+    branch = "support_custom_url_provider",
     dependencies = { "nvim-lua/plenary.nvim", lazy = true },
     keys = {
       "<leader>revu",

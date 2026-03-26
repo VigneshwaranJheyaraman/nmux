@@ -28,13 +28,18 @@ M.setup = function(opts)
   local code_review_lib = require("codereview")
   local config = require("config")
   local local_model = config.get_config("local_model")
-  local ai_provider = "custom_cmd"
+  local ai_provider = "custom_url"
   local professor_core = require("vickysuraj.professor.core")
-  local ai_command = { cmd = "call_professor_for_code_review", args = { professor_core.make_default_ask_url() } }
+  local call_professor = {
+    url = professor_core.make_default_ask_url(),
+    base_payload = { model = professor_core.default_model },
+    on_success = professor_core.get_professor_response,
+    headers = {
+      [professor_core.secret_key] = professor_core.secret
+    },
+    prompt_key = "query"
+  }
   local opencode_cmd = { cmd = "opencode", args = { "run", "--model", opts.model, "--agent", "build" } }
-  -- if local_model then
-  --   ai_provider = "ollama"
-  -- end
 
   code_review_lib.setup({
     -- Provider settings (all auto-detected from git remote)
@@ -70,12 +75,13 @@ M.setup = function(opts)
     -- AI review
     ai           = {
       enabled       = true,
-      provider      = ai_provider,  -- "claude_cli" | "anthropic" | "openai" | "ollama" | "custom_cmd"
-      review_level  = "info",       -- "info" | "suggestion" | "warning" | "error"
-      max_file_size = 500,          -- skip files larger than N lines (0 = unlimited)
+      provider      = ai_provider, -- "claude_cli" | "anthropic" | "openai" | "ollama" | "custom_cmd"
+      review_level  = "info",      -- "info" | "suggestion" | "warning" | "error"
+      max_file_size = 500,         -- skip files larger than N lines (0 = unlimited)
 
       ollama        = { model = local_model, base_url = "http://localhost:11434", },
-      custom_cmd    = ai_command
+      custom_cmd    = opencode_cmd,
+      custom_url    = call_professor
     },
 
     -- Override or disable keybindings

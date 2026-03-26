@@ -1,6 +1,7 @@
-local secret = "naanum rowdy dhaan"
 local stdin_prompt = "."
 local M = {}
+M.secret = "naanum rowdy dhaan"
+M.secret_key = "X-prof"
 
 --- @class ProfessorCmd
 --- @field cmd string
@@ -67,7 +68,7 @@ local function make_professor_curl(uri, prompt, model_name)
     "-H", "Accept: application/json",
     "-H", "content-type: application/json",
     "-H", ("user-id: " .. M.user_id),
-    "-H", ("X-prof: " .. secret)
+    "-H", (M.secret_key ": " .. M.secret)
   }
 
   if request_body ~= nil and prompt then
@@ -105,6 +106,12 @@ M.make_professor_supported_models = function(url)
     nil,
     nil
   )
+end
+
+--- @param professor_response table<string, table<string, string>>
+--- @return string
+M.get_professor_response = function(professor_response)
+  return professor_response.message.response
 end
 
 return M

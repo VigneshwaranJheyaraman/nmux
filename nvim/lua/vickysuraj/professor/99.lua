@@ -60,7 +60,7 @@ M.make_provider = function()
       return false, ""
     end
 
-    local str = result.message.response
+    local str = professor.get_professor_response(result)
     if vim.trim(str) == "" then
       str = context.provider_stdout
     end
