@@ -68,7 +68,7 @@ local function make_professor_curl(uri, prompt, model_name)
     "-H", "Accept: application/json",
     "-H", "content-type: application/json",
     "-H", ("user-id: " .. M.user_id),
-    "-H", (M.secret_key ": " .. M.secret)
+    "-H", (M.secret_key .. ": " .. M.secret)
   }
 
   if request_body ~= nil and prompt then
