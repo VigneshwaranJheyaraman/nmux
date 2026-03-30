@@ -5,7 +5,8 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", lazy = true },
     keys = {
       "<leader>revu",
-      "<leader>revuai"
+      "<leader>revuai",
+      "<leader>prn"
     },
     cmd = {
       "CodeReview",

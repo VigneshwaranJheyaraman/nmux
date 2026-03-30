@@ -14,7 +14,7 @@ local function setup_key_maps()
         mode = "n"
       },
       {
-        shortcut = "<leader>npr",
+        shortcut = "<leader>prn",
         mapper_cmd_OR_function = ":CodeReviewOpen<CR>",
         desc = "Create a PR",
         mode = "n"

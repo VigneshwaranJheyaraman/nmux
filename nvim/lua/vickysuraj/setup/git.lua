@@ -5,6 +5,9 @@ local picker_utils = require("vickysuraj.utils.picker")
 --- @field branch_name string?
 --- @field new_branch boolean?
 
+--- @class BranchInfo
+--- @field name string
+--- @field time string
 
 --- @param opts CheckoutOpts
 local function checkout_master(opts)
@@ -21,9 +24,23 @@ local function checkout_master(opts)
   vim.cmd("silent! Git checkout " .. branch_name)
 end
 
---- @return table<string>
+--- @return PickerList[]
 local function list_all_branch()
-  return vim.split(vim.fn.system("git branch --list"), "\n", { trimempty = true })
+  local all_branches = vim.split(
+    vim.fn.system(
+      "git branch --list --sort=-committerdate --format='{\"name\": \"%(refname:short)\", \"time\": \"%(committerdate:relative)\"}'"),
+    "\n", { trimempty = true })
+  --- @type PickerList[]
+  local branches_info = {}
+  for _, info in ipairs(all_branches) do
+    --- @type BranchInfo
+    local git_branch_info = vim.fn.json_decode(info)
+    table.insert(branches_info, {
+      label = git_branch_info.name .. " committed " .. git_branch_info.time,
+      id = git_branch_info.name
+    })
+  end
+  return branches_info
 end
 
 local M = {}
