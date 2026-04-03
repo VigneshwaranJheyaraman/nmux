@@ -22,16 +22,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end
 })
 
+-- for enabling highlight search on command line entry i.e., <ESC>/
 ---@param toggleValue boolean
 local function toggleHighlightAndIncrementSearch(toggleValue)
   vim.opt.hlsearch = toggleValue
   vim.opt.incsearch = toggleValue
 end
-
 local searchGroup = vim.api.nvim_create_augroup("search-highlight", { clear = true })
 local searchPattern = "/,\\?"
-
--- for enabling highlight search on command line entry i.e., <ESC>/
 vim.api.nvim_create_autocmd("CmdlineEnter", {
   desc = "i handle search highlight toggling",
   pattern = searchPattern,
@@ -47,6 +45,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
     toggleHighlightAndIncrementSearch(false)
   end
 })
+
 -- always set relative number and number
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   desc = "i make sure we always have relative number and number set",
@@ -61,4 +60,26 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     vim.opt.number = enableNumbr;
     vim.opt.relativenumber = enableNumbr;
   end
+})
+
+-- LSP progress thanks reddit u/heymanh
+vim.api.nvim_create_autocmd('LspProgress', {
+  callback = function(ev)
+    local value = ev.data.params.value or {}
+    local msg = value.message or "done"
+
+    -- rust analyszer in particular has really long LSP messages so truncate them
+    if #msg > 40 then
+      msg = msg:sub(1, 37) .. "..."
+    end
+
+    vim.api.nvim_echo({ { msg or 'done' } }, false, {
+      id = 'lsp.' .. ev.data.client_id,
+      kind = 'progress',
+      source = 'vim.lsp',
+      title = value.title,
+      status = value.kind ~= 'end' and 'running' or 'success',
+      percent = value.percentage,
+    })
+  end,
 })

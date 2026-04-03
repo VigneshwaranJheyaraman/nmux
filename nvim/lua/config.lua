@@ -31,7 +31,7 @@ local state = {
   have_swap_file = false,
   shell = os.getenv("SHELL") or "/bin/zsh",
   mouse = false,
-  default_theme = "koda",
+  default_theme = "koda-moss",
   local_model = get_default_local_model(),
   prompt_path = getenv("PROMPTS_PATH")
 }
