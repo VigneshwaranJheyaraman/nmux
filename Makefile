@@ -1,5 +1,5 @@
 package_manager = apt
-.PHONY: setup install-fonts install-nvim install-tmux setup-config setup-tmux-config setup-nvim-config pull-nmux setup-clojure setup-clojure-config gh-install oc-install
+.PHONY: setup install-fonts install-nvim install-tmux setup-config setup-tmux-config setup-nvim-config pull-nmux setup-clojure setup-clojure-config gh-install oc-install brewstrap
 
 pull-nmux:
 	if [ -z "/home/$(whoami)/nmux" ]; then
@@ -42,7 +42,7 @@ setup-clojure:
 
 setup-clojure-config: setup-clojure
 	echo setting up clojure config
-	cp ./repl.deps.edn /home/$(whoami)/.clojure/deps.edn
+	cp -rf ./.clojure /home/$(whoami)/.clojure
 
 
 install-fonts:
@@ -56,3 +56,6 @@ oc-install:
 
 setup: setup-config install-fonts oc-install gh-install
 
+brewstrap:
+	@echo "I am using homeBREW for better package managing and easy bootup"
+	source ./setup.sh && init
