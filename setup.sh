@@ -54,9 +54,9 @@ function install_dev_tools() {
 	echo "setting up dev tools"
 	brew_install_util "make"
 	brew_install_util "jq"
-	brew_install_util "clojure" && brew uninstall -ignore-dependencies openjdk@26
-    echo "make sure JAVA_HOME=/opt/homebrew/Cellar/openjdk@21/21.0.11/bin is added to PATH=\$JAVA_HOME:\$PATH"
-	brew_install_util "openjdk@21" "java"
+	brew_install_util "clojure" && brew uninstall --ignore-dependencies openjdk@26
+	echo "make sure JAVA_HOME=/opt/homebrew/Cellar/openjdk@21/21.0.11/bin is added to PATH=\$JAVA_HOME:\$PATH"
+	brew_install_util "openjdk@21" "java@21"
 	brew_install_util "postgresql@18" "psql"
 	brew_install_util "cmake"
     setup_nvm
@@ -109,7 +109,7 @@ function setup_nmux() {
 		cd $nmux_dir && git pull origin master
 	fi
 	echo "setting neovim config"
-	cp -rf $nmux_dir/nvim $CONFIG_DIR/nvim
+	cp -rf $nmux_dir/nvim $CONFIG_DIR/
 	echo "setting opencode config"
 	cp -rf $nmux_dir/opencode $CONFIG_DIR/opencode
 	echo "setting clojure-lsp config"
@@ -117,8 +117,7 @@ function setup_nmux() {
 	echo "setting tmux config"
 	cp -rf $nmux_dir/.tmux.conf ~/.tmux.conf
 	echo "setting clojure config"
-	mkdir -p ~/.clojure
-	cp -rf $nmux_dir/repl.deps.edn ~/.clojure/deps.edn	
+	cp -rf $nmux_dir/.clojure ~/.clojure
 }
 
 function init() {
