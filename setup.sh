@@ -9,6 +9,7 @@ CONFIG_DIR=~/.config
 NEOVIM_DIR_NAME=neovim
 NEOVIM_DIR=$OPT_DIR/$NEOVIM_DIR_NAME
 NEOVIM_BIN=$NEOVIM_DIR/bin
+NVM_DIR=$OPT_DIR/nvm
 BREW_DIR=/opt/homebrew
 
 function command_exists() {
@@ -35,6 +36,20 @@ function brew_install_util() {
 	fi
 }
 
+function setup_nvm() {
+    if ! command_exists "nvm"; then
+        mkdir -p $NVM_DIR
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | NVM_DIR=$NVM_DIR bash
+        echo "make sure to copy the output to ~/.bashrc / ~/.zshrc"
+        echo "export NVM_DIR=\"~/opt/nvm\" \
+            [ -s \"\$NVM_DIR/bash_completion\" ] && \. \"\$NVM_DIR/bash_completion\"  # This loads nvm bash_completion \
+            alias nvmgr=\"unalias nvmgr;[ -s \"\$NVM_DIR/nvm.sh\" ] && . \"\$NVM_DIR/nvm.sh\" nvm \$@"
+        echo 'run nvm install $NODE_VERSION'
+    else
+        echo "nvm already installed"
+    fi
+}
+
 function install_dev_tools() {
 	echo "setting up dev tools"
 	brew_install_util "make"
@@ -42,8 +57,8 @@ function install_dev_tools() {
 	brew_install_util "openjdk@21" "java"
 	brew_install_util "postgresql@18" "psql"
 	brew_install_util "clojure" && brew uninstall -ignore-dependencies openjdk@26
-	brew_install_util "nvm"
 	brew_install_util "cmake"
+    setup_nvm
 	brew_install_util "tmux"
 	brew_install_util "gh"
 }
@@ -101,7 +116,8 @@ function setup_nmux() {
 	echo "setting tmux config"
 	cp -rf $nmux_dir/.tmux.conf ~/.tmux.conf
 	echo "setting clojure config"
-	cp -rf $nmux_dir/.clojure ~/.clojure
+	mkdir -p ~/.clojure
+	cp -rf $nmux_dir/repl.deps.edn ~/.clojure/deps.edn	
 }
 
 function init() {
