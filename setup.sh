@@ -55,6 +55,7 @@ function install_dev_tools() {
 	brew_install_util "make"
 	brew_install_util "jq"
 	brew_install_util "clojure" && brew uninstall -ignore-dependencies openjdk@26
+    echo "make sure JAVA_HOME=/opt/homebrew/Cellar/openjdk@21/21.0.11/bin is added to PATH=\$JAVA_HOME:\$PATH"
 	brew_install_util "openjdk@21" "java"
 	brew_install_util "postgresql@18" "psql"
 	brew_install_util "cmake"
