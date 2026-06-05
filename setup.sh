@@ -50,18 +50,66 @@ function setup_nvm() {
     fi
 }
 
+function setup_java_certs_macos() {
+	if [[ "$OSTYPE" != "darwin"* ]]; then
+		return
+	fi
+
+	echo "Setting up Java certificates for macOS"
+
+	# Create certs directory
+	mkdir -p $OPT_DIR/certs
+
+	# Setup OpenJDK symlink
+	OPENJDK_SYMLINK="/Library/Java/JavaVirtualMachines/openjdk@21.jdk"
+	if [ ! -L "$OPENJDK_SYMLINK" ]; then
+		echo "Setting up OpenJDK symlink..."
+		sudo ln -sfn $(brew --prefix openjdk@21)/libexec/openjdk.jdk $OPENJDK_SYMLINK
+	else
+		echo "OpenJDK symlink already exists"
+	fi
+
+	# Combine certificates
+	echo "Combining certificates..."
+	cat /tmp/sys.pem /tmp/roots.pem > /tmp/all.pem
+
+	# Split combined certificates into individual files
+	awk 'BEGIN{n=0} /-----BEGIN CERTIFICATE-----/{n++; file="/tmp/cert-"n".pem"} file{print > file}' /tmp/all.pem
+
+	# Import certificates into Java keystore
+	echo "Importing certificates into Java keystore..."
+	JAVA_KEYSTORE=$(/usr/libexec/java_home)/lib/security/cacerts
+	for f in /tmp/cert-*.pem; do
+		ALIAS="mac-$(openssl x509 -noout -fingerprint -in $f 2>/dev/null | tr -d ':' | tail -c 9)"
+		# Check if alias already exists in keystore
+		if sudo keytool -list -alias "$ALIAS" -keystore $JAVA_KEYSTORE -storepass changeit 2>/dev/null | grep -q "Certificate"; then
+			echo "Certificate $ALIAS already exists, skipping..."
+		else
+			sudo keytool -importcert -noprompt -trustcacerts -alias "$ALIAS" -file $f -keystore $JAVA_KEYSTORE -storepass changeit 2>/dev/null
+		fi
+	done
+
+	echo "Done setting up Java certificates for macOS"
+}
+
 function install_dev_tools() {
 	echo "setting up dev tools"
 	brew_install_util "make"
 	brew_install_util "jq"
-	brew_install_util "clojure" && brew uninstall --ignore-dependencies openjdk@26
+	brew_install_util "clojure"
+    if ! command_exists "clojure" ; then
+        brew uninstall --ignore-dependencies openjdk@26
+    fi
 	echo "make sure JAVA_HOME=/opt/homebrew/Cellar/openjdk@21/21.0.11/bin is added to PATH=\$JAVA_HOME:\$PATH"
-	brew_install_util "openjdk@21" "java@21"
+	brew_install_util "openjdk@21" "java"
+	setup_java_certs_macos
 	brew_install_util "postgresql@18" "psql"
 	brew_install_util "cmake"
     setup_nvm
 	brew_install_util "tmux"
 	brew_install_util "gh"
+    brew_install_util "leiningen"
+    brew_install_util "borkdude/brew/babashka" "babashka"
 }
 
 function install_ai_tools() {
@@ -111,13 +159,14 @@ function setup_nmux() {
 	echo "setting neovim config"
 	cp -rf $nmux_dir/nvim $CONFIG_DIR/
 	echo "setting opencode config"
-	cp -rf $nmux_dir/opencode $CONFIG_DIR/opencode
+	cp -rf $nmux_dir/opencode $CONFIG_DIR/
 	echo "setting clojure-lsp config"
-	cp -rf $nmux_dir/clojure-lsp $CONFIG_DIR/clojure-lsp
+	cp -rf $nmux_dir/clojure-lsp $CONFIG_DIR/
 	echo "setting tmux config"
-	cp -rf $nmux_dir/.tmux.conf ~/.tmux.conf
+	cp $nmux_dir/.tmux.conf ~/.tmux.conf
 	echo "setting clojure config"
-	cp -rf $nmux_dir/.clojure ~/.clojure
+	cp -rf $nmux_dir/.clojure ~/
+    cp -rf $nmux_dir/.clojure/deps.edn ~/.config/clojure/deps.edn
 }
 
 function init() {
